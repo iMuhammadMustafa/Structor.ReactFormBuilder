@@ -11,7 +11,7 @@ export default defineConfig(({ command, mode }) => {
     //envPrefix: "VITE",
     server: {
       host: true,
-      port: Number.parseInt(env.PORT) || 3000,
+      port: Number.parseInt(env.PORT) || 3001,
       open: true,
     },
   };
