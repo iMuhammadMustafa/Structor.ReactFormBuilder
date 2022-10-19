@@ -1,13 +1,19 @@
-import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
+import path from "path";
+import { defineConfig, loadEnv } from "vite";
 
+// @ts-ignore
+import pathsFromConfig from "./tsconfig.paths.json";
+
+// mode/commands Extends 'process.env.*' with VITE_*-variables from '.env.(mode=production|development)'
 export default defineConfig(({ command, mode }) => {
-  // Load env file based on `mode` in the current working directory.
-  // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
     plugins: [react()],
+    resolve: {
+      alias: resolveTSConfigPathAlias(),
+    },
     //envPrefix: "VITE",
     server: {
       host: true,
@@ -17,11 +23,15 @@ export default defineConfig(({ command, mode }) => {
   };
 });
 
-// export default ({ mode }) => {
-//   // Extends 'process.env.*' with VITE_*-variables from '.env.(mode=production|development)'
-//   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-//   console.log(process.env.VITE_PORT);
-//   return defineConfig({
-//     plugins: [react()],
-//   });
-// };
+function resolveTSConfigPathAlias() {
+  const pathsAliasesArray = pathsFromConfig.compilerOptions.paths;
+  const aliasesKeys = Object.keys(pathsAliasesArray).map(x => x.slice(0, -2));
+
+  const aliases = {};
+
+  aliasesKeys.forEach(key => {
+    let pathString = pathsAliasesArray[key + "/*"][0].slice(0, -1);
+    aliases[key] = path.join(path.resolve(__dirname, pathString));
+  });
+  return aliases;
+}
