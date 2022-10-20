@@ -8,7 +8,14 @@
   "bracketSameLine": false,
   "arrowParens": "avoid",
 
-  "importOrder": ["^(^react$|@react|react|^recoil$)", "<THIRD_PARTY_MODULES>", "^@/(.*)$", "^./[a-z]+/", "^[./]"],
+  "importOrder": [
+    "^(^react$|@react|react|^recoil$)",
+    "<THIRD_PARTY_MODULES>",
+    "^@(.*)$",
+    "^@/(.*)$",
+    "^./[a-z]+/",
+    "^[./]"
+  ],
   "importOrderGroupNamespaceSpecifiers": true,
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
