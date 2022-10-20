@@ -1,3 +1,6 @@
+$primary: teal;
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -6,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #1d2022; //$dark; //#242424 //#212529 //#1d2022
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,10 +29,12 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  //display: flex;
+  //place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #1d2022;
+  color: $light;
 }
 
 h1 {
