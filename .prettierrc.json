@@ -17,6 +17,6 @@
     "^[./]"
   ],
   "importOrderGroupNamespaceSpecifiers": true,
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "importOrderSeparation": true
 }
