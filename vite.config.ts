@@ -9,6 +9,7 @@ import pathsFromConfig from "./tsconfig.paths.json";
 // mode/commands Extends 'process.env.*' with VITE_*-variables from '.env.(mode=production|development)'
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  let openBrowser = mode === "development";
 
   return {
     plugins: [react()],
@@ -19,13 +20,15 @@ export default defineConfig(({ command, mode }) => {
     server: {
       host: true,
       port: Number.parseInt(env.PORT) || 3001,
-      open: true,
+      open: openBrowser,
     },
+
     test: {
       globals: true,
       environment: "jsdom",
       setupFiles: "./src/setupTests.ts",
       css: false,
+      
     },
   };
 });
