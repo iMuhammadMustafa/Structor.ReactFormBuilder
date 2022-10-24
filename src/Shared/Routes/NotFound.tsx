@@ -1,12 +1,3 @@
-import { useRoutes } from "react-router-dom";
-
-import * as RoutingService from "./Routing.Service";
-
-export default function RoutingComponent() {
-  const routes = RoutingService.getRoutes();
-  return useRoutes([...routes]);
-}
-
 export function Home() {
   return (
     <div className="App">

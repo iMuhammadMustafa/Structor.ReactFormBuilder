@@ -1,8 +1,8 @@
+import { Home } from "./NotFound";
 import { RouteElement } from "./Routes.Types";
 import { NAVBAR, NAVBAR_START, SIDEBAR } from "./Routes.Types";
-import { Home } from "./RoutingComponent";
 
-export const routes: Array<RouteElement> = [
+const routes: Array<RouteElement> = [
   {
     name: "Home",
     path: "/",

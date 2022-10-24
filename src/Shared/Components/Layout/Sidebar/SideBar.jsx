@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import * as RoutingService from "@/Shared/Routes/Routing.Service";
+import { getSideBarRoutes } from "@Shared/Routes/Routing.Service";
 
 const appName = import.meta.env.VITE_APP_NAME;
 function SideBar() {
@@ -23,7 +23,7 @@ function CanvasBody() {
   return (
     <div className="offcanvas-body navbar-dark">
       <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-        {RoutingService.getSideBarRoutes().map((route, index) => {
+        {getSideBarRoutes().map((route, index) => {
           return (
             <li key={index} className="nav-item">
               <NavLink className="nav-link" to={route.path}>

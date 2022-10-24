@@ -2,7 +2,7 @@
 // import { FiLogOut } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 
-import * as RoutingService from "@/Shared/Routes/Routing.Service";
+import { getNavBarStartRoutes } from "@Shared/Routes/Routing.Service";
 
 import SideBar, { SideBarToggler } from "../Sidebar/SideBar";
 
@@ -59,7 +59,7 @@ function NavBarLinksContainer({ children }) {
 function NavBarStartLinks() {
   return (
     <>
-      {RoutingService.getNavBarStartRoutes().map((route, index) => {
+      {getNavBarStartRoutes().map((route, index) => {
         return (
           <li key={index} className="nav-item">
             <NavLink className="nav-link" to={route.path} data-testid="navBarStartLink">

@@ -1,8 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "jest": true
+    "es2021": true
+    // "jest": true
   },
   "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended"],
   "parser": "@typescript-eslint/parser",
@@ -23,5 +23,9 @@
     "array-callback-return": "warn",
     "react/prop-types": "off",
     "no-debugger": "warn"
+  },
+  "globals": {
+    "describe": "writable",
+    "it": "writable"
   }
 }
