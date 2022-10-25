@@ -18,7 +18,7 @@ export const getRoutes = () => {
 
 export const getNavBarStartRoutes = () => {
   return routes
-    .filter(route => route.isActive && route?.dist?.find(dist => dist.name === NAVBAR && dist.align === NAVBAR_START))
+    .filter(route => route.isActive && route?.dist?.some(dist => dist.name === NAVBAR && dist.align === NAVBAR_START))
     .sort((a, b) => {
       if (a.order && b.order && a.order > b.order) return 1;
       else return -1;
