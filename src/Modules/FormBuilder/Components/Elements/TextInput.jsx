@@ -29,13 +29,12 @@ export function MemoizedTextInput({
     setIsTouched(true);
     await handleInputBlur({ name, value, type }, e);
   };
-  const handleInput = async e => {
-    await handleInputChange({ name, value, type }, e);
+  const handleChange = async e => {
+    await handleInputChange({ name, value: e.target.value, type }, e);
   };
 
   useEffect(() => {
     if (isFormSubmit) {
-      setIsTouched(true);
       handleBlur({ target: { name: name, value: value } });
     }
   }, [isFormSubmit]);
@@ -45,25 +44,26 @@ export function MemoizedTextInput({
       setIsTouched(false);
     }
   }, [isFormCleared]);
+
   return (
     <div className="mb-3 row">
       <FormLabel id={id || name} label={label} className="col-sm-2" />
       <div className="col-sm-10">
         <input
           type={type}
-          className={`form-control ${isTouched && errors.length === 0 && "is-valid"} ${
-            isTouched && errors.length > 0 && "is-invalid"
+          className={`form-control ${isTouched && errors?.length === 0 && "is-valid"} ${
+            isTouched && errors?.length > 0 && "is-invalid"
           }`}
           id={id || name}
           name={name}
-          onChange={handleInput}
+          onChange={handleChange}
           onBlur={handleBlur}
           value={value || ""}
           placeholder={placeHolder ?? label}
         />
         {helpText && <HelpText id={id || name} helpText={helpText} />}
-        {errors.length === 0 && <ValidFeedback id={id || name} />}
-        {errors.length > 0 && <InValidFeedback id={id || name} errors={errors} />}
+        {errors?.length === 0 && <ValidFeedback id={id || name} />}
+        {errors?.length > 0 && <InValidFeedback id={id || name} errors={errors} />}
       </div>
     </div>
   );
