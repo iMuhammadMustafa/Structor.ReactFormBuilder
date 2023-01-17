@@ -1,9 +1,9 @@
 import { memo } from "react";
 
-const InValidFeedback = memo(function InValidFeedback(props) {
-  return <MemoizedInValidFeedback {...props} />;
+const InvalidFeedback = memo(function InvalidFeedback(props) {
+  return <MemoizedInvalidFeedback {...props} />;
 });
-function MemoizedInValidFeedback({ id, errors }) {
+function MemoizedInvalidFeedback({ id, errors }) {
   return (
     errors &&
     errors.map((error, index) => (
@@ -14,4 +14,4 @@ function MemoizedInValidFeedback({ id, errors }) {
   );
 }
 
-export default InValidFeedback;
+export default InvalidFeedback;

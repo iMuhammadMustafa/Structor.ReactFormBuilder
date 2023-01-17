@@ -1,45 +1,12 @@
-import { useEffect, useState } from "react";
-import HelpText from "./UI/HelpText";
-import InValidFeedback from "./UI/InValidFeedback";
-import FormLabel from "./UI/Label";
-import ValidFeedback from "./UI/ValidFeedback";
+import FormLabel from "../UI/FormLabel";
+import HelpText from "../UI/HelpText";
+import InvalidFeedback from "../UI/InvalidFeedback";
+import ValidFeedback from "../UI/ValidFeedback";
 
-export default function DropDown({
-  id,
-  name,
-  label,
-  value,
-  helpText,
-  placeHolder,
-  handleInputChange,
-  handleInputBlur,
-  isFormSubmit,
-  isFormCleared,
-  errors,
-  options,
-}) {
-  const [isTouched, setIsTouched] = useState(false);
-
-  const handleBlur = async (e) => {
-    setIsTouched(true);
-    await handleInputBlur(e);
+export default function DropDown(props) {
+  const { id, name, placeHolder, label, value, options, helpText, isTouched, handleChange, handleBlur, errors } = {
+    ...props,
   };
-  const handleInput = async (e) => {
-    await handleInputChange(e);
-  };
-
-  useEffect(() => {
-    if (isFormSubmit) {
-      setIsTouched(true);
-      handleBlur({ target: { name: name, value: value } });
-    }
-  }, [isFormSubmit]);
-
-  useEffect(() => {
-    if (isFormCleared) {
-      setIsTouched(false);
-    }
-  }, [isFormCleared]);
 
   return (
     <div className="mb-3 row">
@@ -49,15 +16,15 @@ export default function DropDown({
           className={`form-select ${isTouched && errors.length === 0 && "is-valid"} ${
             isTouched && errors.length > 0 && "is-invalid"
           }`}
-          aria-label="Default select example"
+          aria-label="Default select"
           id={id || name}
           name={name}
-          onChange={handleInput}
+          onChange={handleChange}
           onBlur={handleBlur}
           value={value || ""}
         >
           <option value="">{placeHolder ?? label}</option>
-          {options?.map((option) => {
+          {options?.map(option => {
             return (
               <option key={name + "option" + option.value} value={option.value}>
                 {option.label}
@@ -68,7 +35,7 @@ export default function DropDown({
 
         {helpText && <HelpText id={id || name} helpText={helpText} />}
         {errors.length === 0 && <ValidFeedback id={id || name} />}
-        {errors.length > 0 && <InValidFeedback id={id || name} errors={errors} />}
+        {errors.length > 0 && <InvalidFeedback id={id || name} errors={errors} />}
       </div>
     </div>
   );

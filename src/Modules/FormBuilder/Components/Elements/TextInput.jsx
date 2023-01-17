@@ -2,48 +2,17 @@ import { memo, useEffect, useState } from "react";
 
 import FormLabel from "../UI/FormLabel";
 import HelpText from "../UI/HelpText";
-import InValidFeedback from "../UI/InValidFeedback";
+import InvalidFeedback from "../UI/InvalidFeedback";
 import ValidFeedback from "../UI/ValidFeedback";
 
 const TextInput = memo(function TextInput(props) {
   return <MemoizedTextInput {...props} />;
 });
 
-export function MemoizedTextInput({
-  id,
-  name,
-  type,
-  label,
-  value,
-  helpText,
-  placeHolder,
-  handleInputChange,
-  handleInputBlur,
-  isFormSubmit,
-  isFormCleared,
-  errors,
-}) {
-  const [isTouched, setIsTouched] = useState(false);
-
-  const handleBlur = async e => {
-    setIsTouched(true);
-    await handleInputBlur({ name, value, type }, e);
+export function MemoizedTextInput(props) {
+  const { id, name, type, label, value, helpText, placeHolder, isTouched, handleChange, handleBlur, errors } = {
+    ...props,
   };
-  const handleChange = async e => {
-    await handleInputChange({ name, value: e.target.value, type }, e);
-  };
-
-  useEffect(() => {
-    if (isFormSubmit) {
-      handleBlur({ target: { name: name, value: value } });
-    }
-  }, [isFormSubmit]);
-
-  useEffect(() => {
-    if (isFormCleared) {
-      setIsTouched(false);
-    }
-  }, [isFormCleared]);
 
   return (
     <div className="mb-3 row">
@@ -63,7 +32,7 @@ export function MemoizedTextInput({
         />
         {helpText && <HelpText id={id || name} helpText={helpText} />}
         {errors?.length === 0 && <ValidFeedback id={id || name} />}
-        {errors?.length > 0 && <InValidFeedback id={id || name} errors={errors} />}
+        {errors?.length > 0 && <InvalidFeedback id={id || name} errors={errors} />}
       </div>
     </div>
   );
