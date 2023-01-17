@@ -1,48 +1,61 @@
 import { useReducer, useRef } from "react";
 
+import { ValidateFormInputs } from "@Modules/FormBuilder/Services/Validation.Service";
+
 import FormButtons from "../UI/FormButtons";
 import { InputTypes } from "./Form.Types";
 import FormBuilder from "./FormBuilder";
 
-export default function Form({ values, setValues, schema: { title, fields }, handleFormSubmit, children }) {
+export default function Form({
+  values,
+  setValues,
+  schema: { title, fields, clearBtn, dev },
+  handleFormSubmit,
+  children,
+}) {
   const [formState, formStateAction] = useReducer(formReducer, formInitialState);
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    formStateAction({ type: formActions.SUBMIT });
+    await validateFields();
+
     handleFormSubmit(e);
   };
 
+  const handleClear = () => {
+    setValues({});
+    formStateAction({ type: formActions.CLEAR });
+  };
+
   const handleInputBlur = async (field, e) => {
-    // console.log("----------------Blur---------------");
-    // console.log(field);
-    // console.log("----------------------------------");
+    if (!formState.isTouched) formStateAction({ type: formActions.UPDATE });
+    const formField = fields.find(formField => formField.name === field.name);
+
+    const inputErrors = await ValidateFormInputs(formState.errors, formField, field.value);
+    formStateAction({ type: formActions.UPDATE_ERRORS, payload: inputErrors });
   };
 
   const timerRef = useRef();
   const handleInputChange = async (field, e) => {
-    console.log(field);
     formStateAction({ type: formActions.UPDATE });
-    updateValues(field);
 
-    // let field = fields.find((field) => field.name === target.name);
-    // // if (!field) {
-    // //   field = fields.find((field) => field.name === target.name.match(/.+?(?=[[])/)[0]);
-    // //   // if (field.type === InputTypes.GROUP) {
-    // //   //   field = field.fields.find((field) => field.name === target.name);
-    // //   // }
-    // // }
-    // clearTimeout(timerRef.current);
-    // timerRef.current = setTimeout(async () => {
-    //   const inputErrors = await ValidateFormInputs(formState.errors, field, target.value);
-    //   formStateAction({ type: formActions.UPDATE_ERRORS, payload: inputErrors });
-    // }, 1000);
+    updateValues(field, e);
+
+    const formField = fields.find(formField => formField.name === field.name);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(async () => {
+      const inputErrors = await ValidateFormInputs(formState.errors, formField, field.value);
+      formStateAction({ type: formActions.UPDATE_ERRORS, payload: inputErrors });
+    }, 1000);
   };
 
-  const updateValues = field => {
-    const { name, type, value, checked, parentName } = { ...field };
+  const updateValues = (field, e) => {
+    const { name, type, value, parentName } = { ...field };
     switch (type) {
       case InputTypes.CHECKBOX:
-        setValues({ ...values, [name]: checked });
+        setValues({ ...values, [name]: e.target.checked });
         break;
       case InputTypes.GROUP:
       case InputTypes.TEXT:
@@ -55,14 +68,24 @@ export default function Form({ values, setValues, schema: { title, fields }, han
     }
   };
 
+  const validateFields = async () => {
+    let inputErrors = [];
+    for (let field of fields) {
+      inputErrors = await ValidateFormInputs(inputErrors, field, values ? values[field.name] : "");
+    }
+    formStateAction({ type: formActions.UPDATE_ERRORS, payload: inputErrors });
+  };
+
   return (
     <div className="container text-light col-7">
-      <DevInfo
-        isTouched={formState.isTouched}
-        isSubmitted={formState.isSubmitted}
-        errors={formState.errors}
-        values={values}
-      />
+      {dev && (
+        <DevInfo
+          isTouched={formState.isTouched}
+          isSubmitted={formState.isSubmitted}
+          errors={formState.errors}
+          values={values}
+        />
+      )}
 
       <h1 className="text-center mb-3">{title}</h1>
       <form onSubmit={handleSubmit} noValidate className="row">
@@ -79,7 +102,7 @@ export default function Form({ values, setValues, schema: { title, fields }, han
         />
         {children}
 
-        <button className="btn btn-primary mx-2 btn-sm">Submit</button>
+        <FormButtons clearBtn={clearBtn} clearForm={handleClear} />
       </form>
     </div>
   );
