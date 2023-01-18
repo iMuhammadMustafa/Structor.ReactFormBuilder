@@ -28,6 +28,9 @@ export default defineConfig(({ command, mode }) => {
       environment: "jsdom",
       setupFiles: "./src/setupTests.ts",
       css: false,
+      coverage: {
+        provider: 'c8',
+      },
       
     },
   };
