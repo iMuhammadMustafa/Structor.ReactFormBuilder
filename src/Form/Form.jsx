@@ -1,15 +1,32 @@
 import { useReducer, useRef } from "react";
 
-import { ValidateFormInputs } from "@Modules/FormBuilder/Services/Validation.Service";
-
-import FormButtons from "../UI/FormButtons";
+import FormButtons from "../OldUI/FormButtons";
+import { ValidateFormInputs } from "../Services/Validation.Service";
 import { InputTypes } from "./Form.Types";
 import FormBuilder from "./FormBuilder";
+import TextInput from "../OldElements/Elements/TextInput";
+import HelpText from "../UI/HelpText/HelpText";
+
+/*
+const formSchema = {title: '123', fields: []}
+
+
+<Form schema = "formSchema" >
+
+	<Form.TextInput/>
+	<Form.TectInput>
+		<Form.HelpText>
+			Hello
+		<Form.HelpText />
+
+</Form>
+*/
+
 
 export default function Form({
   values,
   setValues,
-  schema: { title, fields, clearBtn, dev },
+  schema: { title, fields, clearBtn, dev = false },
   handleFormSubmit,
   children,
 }) {
@@ -150,3 +167,6 @@ function DevInfo({ isTouched, isSubmitted, errors, values }) {
     </div>
   );
 }
+
+Form.TextInput = TextInput;
+Form.HelpText = HelpText;

@@ -1,4 +1,4 @@
-import FormBuilder from "../Form/FormBuilder";
+import FormBuilder from "../../Form/FormBuilder";
 
 export default function InputGroup(props) {
   const {

@@ -1,9 +1,10 @@
 import { memo, useEffect, useState } from "react";
 
-import FormLabel from "../UI/FormLabel";
-import HelpText from "../UI/HelpText";
-import InvalidFeedback from "../UI/InvalidFeedback";
-import ValidFeedback from "../UI/ValidFeedback";
+import FormLabel from "../../OldUI/FormLabel";
+import HelpText from "../../UI/HelpText/HelpText";
+// import HelpText from "../../OldUI/HelpText";
+import InvalidFeedback from "../../OldUI/InValidFeedback";
+import ValidFeedback from "../../OldUI/ValidFeedback";
 
 const TextInput = memo(function TextInput(props) {
   return <MemoizedTextInput {...props} />;

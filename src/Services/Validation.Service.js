@@ -194,3 +194,7 @@ export const errorTypes = {
   CUSTOM: "CUSTOM",
   EXTERNAL: "EXTERNAL",
 };
+
+// if (process.env.NODE_ENV === "test") {
+//    exports.errorTypes = errorTypes;
+// }
