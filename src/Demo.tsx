@@ -5,6 +5,7 @@ import { useState } from "react";
 // import { InputTypes } from "@Modules/FormBuilder/Components/Form/Form.Types";
 
 export function Demo() {
+  console.log(global);
   // const [user, setUser] = useState();
 
   // const checkIfUserExists = async ({ input, options }) => {

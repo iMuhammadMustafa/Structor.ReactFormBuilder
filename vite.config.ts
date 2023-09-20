@@ -30,10 +30,10 @@ export default defineConfig(({ command, mode}) => {
     test: {
       globals: true,
       environment: "jsdom",
-      setupFiles: "./src/setupTests.ts",
+      setupFiles: ["./vitest.setup.ts"],
       css: false,
       coverage: {
-        provider: 'c8',
+        provider: 'v8',
       },
       
     },

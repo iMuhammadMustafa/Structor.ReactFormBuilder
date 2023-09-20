@@ -5,9 +5,4 @@ declare global {
   const userEvent: typeof import("@testing-library/user-event");
 }
 
-// declare const render: typeof render
-// declare const act =  typeofact
-// declare const testScreen = typeof screen
-// declare const userEvent = typeof userEvent
-
 export {};
