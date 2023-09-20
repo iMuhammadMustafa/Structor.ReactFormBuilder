@@ -1,11 +1,13 @@
 // import Form from "@/Form/Form";
 import { useState } from "react";
+import HelpText from "./FormBuilder/Elements/UI/HelpText/HelpText";
+import Label from "./FormBuilder/Elements/UI/Label/Label";
+import Button from "./FormBuilder/Elements/Button/Button";
 
 // import Form from "@Modules/FormBuilder/Components/Form/Form";
 // import { InputTypes } from "@Modules/FormBuilder/Components/Form/Form.Types";
 
 export function Demo() {
-  console.log(global);
   // const [user, setUser] = useState();
 
   // const checkIfUserExists = async ({ input, options }) => {
@@ -96,7 +98,18 @@ export function Demo() {
     <>
       {/* <Form schema={formSchema} values={user} setValues={setUser} handleFormSubmit={handleFormSubmit}> */}
       <>
-        This is Demo
+        <form className="">
+          <div className="col-2 ">
+            <input type="text" className="form-control" id="validationCustom03" />
+            <div className="invalid-feedback">Hello Invalid</div>
+            {/* <div className="valid-feedback">Valid</div> */}
+          </div>
+        </form>
+        <div>This is Demo</div>
+        <Button id="11212" type="submit" />
+        <Label id="11212" htmlFor="Hello">
+          HelloX
+        </Label>
         {/* <Form.TextInput
             value="500"
             type={"text"}
