@@ -15,7 +15,7 @@ const Label: React.FC<ILabel> = ({
   id,
   text,
   isRequired = false,
-  cssClasses = "form-label",
+  cssClasses = "form-label col-sm-2",
   requiredCssClasses = "text-danger",
   children,
   ...htmlProps
@@ -32,7 +32,7 @@ const Label: React.FC<ILabel> = ({
 /**
  * A React component that displays a label for an input element.
  *
- * @param id - The ID of the label element (required).
+ * @param id - The for ID of the label's input element. The Label's id will be id-label (required).
  * @param text - The text to display in the label element (optional).
  * @param isRequired - Whether the input element is required (optional; defaults to false).
  * @param cssClasses - The CSS classes to apply to the label element (optional; defaults to "form-label").
@@ -40,5 +40,6 @@ const Label: React.FC<ILabel> = ({
  * @param children? - The child component(s) to include in the label element (optional).
  * @param htmlProps - Any other HTML properties to include in the label element (optional).
  * @returns A memoized label element with the specified ID and CSS classes, containing the label text, an asterisk if the input is required, and/or child component(s).
+ * @example <Label id="my-label" text="My Label" isRequired={true} cssClasses="form-label" requiredCssClasses="text-danger" />
  */
 export default memo(Label);
