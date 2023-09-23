@@ -1,4 +1,7 @@
 $primary: teal;
+// $secondary: #ff6347;
+$form-text-color: #4c4c4c;
+:root{--bs-secondary-color: #4c4c4c}
 @import "/node_modules/bootstrap/scss/bootstrap.scss";
 
 :root {
