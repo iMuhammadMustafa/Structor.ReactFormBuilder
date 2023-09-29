@@ -1,4 +1,5 @@
-import { IField, IFieldBuilder, InputTypes } from "./FieldBuilder";
+import { IFieldBuilder } from "./FieldBuilder";
+import { IField, InputTypes } from "../Types/Field";
 import { action } from "@storybook/addon-actions";
 
 const Base: IFieldBuilder = {
@@ -22,13 +23,26 @@ const Base: IFieldBuilder = {
 
 const WithHTMLProps: IFieldBuilder = {
   ...Base,
+  name: "WithHTMLProps",
   label: "With HTML Props",
   htmlProps: { disabled: true, required: true, placeholder: "Disabled" },
+};
+
+const WithErrors: IFieldBuilder = {
+  ...Base,
+  label: "With Error",
+  name: "username",
+  isFormSubmit: true,
+  errors: [
+    { name: "Required", message: "This field is required", text: "This field is required", field: "username" },
+    { name: "Required", message: "This field is required", text: "This field is required", field: "email" },
+  ],
 };
 
 const FieldBuilderMockProps = {
   Base: Base,
   WithHTMLProps: WithHTMLProps,
+  WithErrors: WithErrors,
 };
 
 export default FieldBuilderMockProps;

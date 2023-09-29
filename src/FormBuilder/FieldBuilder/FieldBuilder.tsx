@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TextInput from "../Elements/Inputs/TextInput/TextInput";
 import { ITextInput } from "../Elements/Inputs/TextInput/TextInput";
+import { IField, InputTypes } from "../Types/Field";
 
 export interface IFieldBuilder extends ITextInput {
   id: string;
@@ -12,22 +13,6 @@ export interface IFieldBuilder extends ITextInput {
   isFormSubmit?: boolean;
   isFormCleared?: boolean;
   children?: React.ReactNode;
-}
-
-export interface IField {
-  name: string;
-  value: string;
-  type: InputTypes;
-  children?: React.ReactNode;
-}
-
-export enum InputTypes {
-  TEXT = "text",
-  EMAIL = "email",
-  CHECKBOX = "checkbox",
-  PASSWORD = "password",
-  DROPDOWN = "dropdown",
-  GROUP = "group",
 }
 
 export default function FieldBuilder(field: IFieldBuilder) {

@@ -4,7 +4,7 @@ import FieldBuilder from "./FieldBuilder";
 import FieldBuilderMockProps from "./FieldBuilder.mocks";
 
 const meta = {
-  title: "FieldBuilder",
+  title: "FormBuilder/FieldBuilder",
   component: FieldBuilder,
 } satisfies Meta<typeof FieldBuilder>;
 
@@ -20,5 +20,11 @@ export const Base: Story = {
 export const WithHTMLProps: Story = {
   args: {
     ...FieldBuilderMockProps.WithHTMLProps,
+  },
+};
+
+export const WithErrors: Story = {
+  args: {
+    ...FieldBuilderMockProps.WithErrors,
   },
 };

@@ -1,5 +1,6 @@
 export interface IError {
-  id: string;
+  id?: string;
+  name: string;
   text: string;
   message: string;
   field: string;
