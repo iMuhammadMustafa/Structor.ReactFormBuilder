@@ -5,6 +5,66 @@ import HelpText from "../../UI/HelpText/HelpText";
 import ValidFeedback from "../../UI/ValidFeedback/ValidFeedback";
 import InvalidFeedback from "../../UI/InvalidFeedback/InvalidFeedback";
 
+export interface ITextInput {
+  id: string;
+  name: string;
+  type?: string;
+  label?: string | undefined;
+  value?: string;
+  helpText?: string;
+  placeHolder?: string;
+  isTouched?: boolean;
+  isRequired?: boolean;
+  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  errors?: Array<IError>;
+  cssClasses?: string;
+  children?: React.ReactNode;
+  htmlProps?: React.HTMLProps<HTMLInputElement>;
+}
+
+function TextInput({
+  id,
+  name,
+  type = "text",
+  label,
+  value = "",
+  helpText,
+  placeHolder,
+  isTouched,
+  isRequired,
+  handleChange,
+  handleBlur,
+  errors,
+  cssClasses = "form-control",
+  htmlProps,
+}: ITextInput) {
+  const isValid = isTouched && errors?.length === 0;
+  const isInvalid = isTouched && errors && errors?.length > 0;
+
+  return (
+    <div className="mb-3 row">
+      {label && <Label id={id || name} className="col-sm-2 col-form-label" text={label} isRequired={isRequired} />}
+      <div className="col-sm-10">
+        <input
+          type={type}
+          className={`${cssClasses} ${isValid ? "is-valid" : ""} ${isInvalid ? "is-invalid" : ""}`}
+          id={id || name}
+          name={name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={value}
+          placeholder={placeHolder ?? label ?? name}
+          {...htmlProps}
+        />
+        {helpText && <HelpText id={id || name} text={helpText} />}
+        {(!errors || errors?.length === 0) && <ValidFeedback id={id || name} />}
+        {errors && errors?.length > 0 && <InvalidFeedback id={id || name} errors={errors} />}
+      </div>
+    </div>
+  );
+}
+
 /**
  * A text input component for forms.
  *
@@ -43,62 +103,3 @@ import InvalidFeedback from "../../UI/InvalidFeedback/InvalidFeedback";
  * </TextInput>
  */
 export default memo(TextInput);
-
-export interface ITextInput extends React.HTMLProps<HTMLInputElement> {
-  id: string;
-  name: string;
-  type?: string;
-  label?: string | undefined;
-  value?: string;
-  helpText?: string;
-  placeHolder?: string;
-  isTouched?: boolean;
-  isRequired?: boolean;
-  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errors?: Array<IError>;
-  cssClasses?: string;
-  children?: React.ReactNode;
-}
-
-function TextInput({
-  id,
-  name,
-  type = "text",
-  label,
-  value = "",
-  helpText,
-  placeHolder,
-  isTouched,
-  isRequired,
-  handleChange,
-  handleBlur,
-  errors,
-  cssClasses = "form-control",
-  ...props
-}: ITextInput) {
-  const isValid = isTouched && errors?.length === 0;
-  const isInvalid = isTouched && errors && errors?.length > 0;
-
-  return (
-    <div className="mb-3 row">
-      {label && <Label id={id || name} className="col-sm-2 col-form-label" text={label} isRequired={isRequired} />}
-      <div className="col-sm-10">
-        <input
-          type={type}
-          className={`${cssClasses} ${isValid && "is-valid"} ${isInvalid && "is-invalid"}`}
-          id={id || name}
-          name={name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={value}
-          placeholder={placeHolder ?? label ?? name}
-          {...props}
-        />
-        {helpText && <HelpText id={id || name} text={helpText} />}
-        {(!errors || errors?.length === 0) && <ValidFeedback id={id || name} />}
-        {errors && errors?.length > 0 && <InvalidFeedback id={id || name} errors={errors} />}
-      </div>
-    </div>
-  );
-}

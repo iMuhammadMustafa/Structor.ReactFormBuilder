@@ -16,11 +16,6 @@ const TextWithHelpText: ITextInput = {
   helpText: "Text Input Help Text",
 };
 
-const TextWithDefaultValue: ITextInput = {
-  ...TextWithLabel,
-  defaultValue: "Text Input Default Value",
-};
-
 const TextWithRequired: ITextInput = {
   ...TextWithLabel,
   isRequired: true,
@@ -28,7 +23,8 @@ const TextWithRequired: ITextInput = {
 
 const TextWithDisabled: ITextInput = {
   ...TextWithLabel,
-  disabled: true,
+  placeHolder: "Disabled",
+  htmlProps: { disabled: true },
 };
 
 const TextWithValidFeedBack: ITextInput = {
@@ -62,7 +58,6 @@ const TextInputMockProps = {
   Base,
   TextWithLabel,
   TextWithHelpText,
-  TextWithDefaultValue,
   TextWithRequired,
   TextWithDisabled,
   TextWithValidFeedBack,

@@ -17,3 +17,8 @@ export const Base: Story = {
     ...FieldBuilderMockProps.Base,
   },
 };
+export const WithHTMLProps: Story = {
+  args: {
+    ...FieldBuilderMockProps.WithHTMLProps,
+  },
+};

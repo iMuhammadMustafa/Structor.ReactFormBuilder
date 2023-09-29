@@ -5,6 +5,9 @@ import Label from "./FormBuilder/Elements/UI/Label/Label";
 import Button from "./FormBuilder/Elements/Button/Button";
 import TextInput from "./FormBuilder/Elements/Inputs/TextInput/TextInput";
 import Form from "./FormBuilder/FormX/Form";
+import FieldBuilder from "./FormBuilder/FieldBuilder/FieldBuilder";
+import { InputTypes } from "./FormBuilder/FieldBuilder/FieldBuilder";
+// import FieldBuilder from "./FormBuilder/FormX/FieldBuilder";
 
 // import Form from "@Modules/FormBuilder/Components/Form/Form";
 // import { InputTypes } from "@Modules/FormBuilder/Components/Form/Form.Types";
@@ -98,37 +101,54 @@ export function Demo() {
 
   return (
     <>
+      <div>
+        <div className="mb-5">..</div>
+        <div>
+          <FieldBuilder
+            id="11212"
+            name="username"
+            type={InputTypes.TEXT}
+            value=""
+            handleInputBlur={e => console.log("From Demo", e)}
+            handleInputChange={e => console.log("From Demo", e)}
+            isFormSubmit={false}
+            isFormCleared={false}
+            label="Username"
+          />
+        </div>
+      </div>
       {/* <Form schema={formSchema} values={user} setValues={setUser} handleFormSubmit={handleFormSubmit}></Form> */}
       {/* <> */}
-      {/* <form className="">
-          <div className="col-2 ">
-            <TextInput
-              id="11212"
-              type="text"
-              name="username"
-              label="Username"
-              placeHolder="Enter your username"
-              handleChange={e => console.log(e)}
-            />
-            <input type="text" className="form-control" id="validationCustom03" />
-            <div className="invalid-feedback">Hello Invalid</div>
-            <div className="valid-feedback">Valid</div>
-          </div>
-        </form>
-        <div>This is Demo</div>
-        <Button id="11212" type="submit" />
-        <Label id="11212" htmlFor="Hello">
-          HelloX
-        </Label>
+      <form className="">
+        <div className="col-2 ">
+          <TextInput
+            id="11212"
+            type="text"
+            name="username"
+            label="Username"
+            placeHolder="I'm here"
+            handleChange={e => console.log(e)}
+            htmlProps={{ disabled: true }}
+          />
+          <input type="text" className="form-control" id="validationCustom03" />
+          <div className="invalid-feedback">Hello Invalid</div>
+          <div className="valid-feedback">Valid</div>
+        </div>
+      </form>
+      <div>This is Demo</div>
+      <Button id="11212" type="submit" />
+      <Label id="11212" htmlFor="Hello">
+        HelloX
+      </Label>
 
-        <div className="row mb-3 col-5">
-          <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-            Email
-          </label>
-          <div className="col-sm-10">
-            <input type="email" className="form-control" id="inputEmail3" />
-          </div>
-        </div> */}
+      <div className="row mb-3 col-5">
+        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+          Email
+        </label>
+        <div className="col-sm-10">
+          <input type="email" className="form-control" id="inputEmail3" />
+        </div>
+      </div>
 
       {/* <Form.TextInput
             value="500"
