@@ -19,8 +19,8 @@ const InvalidFeedback: React.FC<IInvalidFeedback> = ({
     <>
       {errors &&
         errors.map((error, index) => (
-          <div key={error.message + index} id={id + "-invalidFeedback" + index} className={cssClasses} {...htmlProps}>
-            {error.text}
+          <div key={error.name + index} id={id + "-invalidFeedback" + index} className={cssClasses} {...htmlProps}>
+            {error.message}
           </div>
         ))}
       {children}

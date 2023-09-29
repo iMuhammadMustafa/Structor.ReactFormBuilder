@@ -4,13 +4,10 @@ import Label from "../../UI/Label/Label";
 import HelpText from "../../UI/HelpText/HelpText";
 import ValidFeedback from "../../UI/ValidFeedback/ValidFeedback";
 import InvalidFeedback from "../../UI/InvalidFeedback/InvalidFeedback";
+import { IField, InputTypes } from "@/FormBuilder/Types/Field";
 
-export interface ITextInput {
-  id: string;
-  name: string;
-  type?: string;
+export interface ITextInput extends IField {
   label?: string | undefined;
-  value?: string;
   helpText?: string;
   placeHolder?: string;
   isTouched?: boolean;
@@ -26,7 +23,7 @@ export interface ITextInput {
 function TextInput({
   id,
   name,
-  type = "text",
+  type = InputTypes.TEXT,
   label,
   value = "",
   helpText,

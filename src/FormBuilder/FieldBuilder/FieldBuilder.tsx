@@ -1,33 +1,39 @@
 import { useEffect, useState } from "react";
-import TextInput from "../Elements/Inputs/TextInput/TextInput";
-import { ITextInput } from "../Elements/Inputs/TextInput/TextInput";
+import TextInput, { ITextInput } from "../Elements/Inputs/TextInput/TextInput";
 import { IField, InputTypes } from "../Types/Field";
+import { IError } from "../Types/Error";
+import { IButtons } from "../Elements/Button/IButton.interface";
 
-export interface IFieldBuilder extends ITextInput {
-  id: string;
-  name: string;
-  type: InputTypes;
-  value: string;
-  handleInputBlur: (target: IField, e: React.FocusEvent<HTMLInputElement>) => void;
-  handleInputChange: (target: IField, e: React.ChangeEvent<HTMLInputElement>) => void;
+export interface IFieldBuilder {
+  fieldSchema: ITextInput;
+  validationSchema?: any;
+  value?: string;
+  errors?: Array<IError>;
+  handleInputBlur?: (target: IField | ITextInput, e: React.FocusEvent<HTMLInputElement>) => void;
+  handleInputChange?: (target: IField | ITextInput, e: React.ChangeEvent<HTMLInputElement>) => void;
   isFormSubmit?: boolean;
   isFormCleared?: boolean;
   children?: React.ReactNode;
 }
 
 export default function FieldBuilder(field: IFieldBuilder) {
-  const { name, value, type, handleInputBlur, handleInputChange, isFormSubmit, isFormCleared, ...htmlFields } = {
+  const { value, fieldSchema, handleInputBlur, handleInputChange, isFormSubmit, isFormCleared, ...htmlFields } = {
     ...field,
   };
+  const { name, type } = { ...fieldSchema };
   const [isTouched, setIsTouched] = useState(false);
 
   const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
     setIsTouched(true);
-    await handleInputBlur({ name, value, type }, e);
+    if (handleInputBlur) {
+      await handleInputBlur({ name, value, type }, e);
+    }
   };
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsTouched(true);
-    await handleInputChange({ name, value: e.target.value, type }, e);
+    if (handleInputChange) {
+      await handleInputChange({ name, value: e.target.value, type }, e);
+    }
   };
 
   useEffect(() => {
@@ -43,16 +49,16 @@ export default function FieldBuilder(field: IFieldBuilder) {
     }
   }, [isFormCleared]);
 
-  switch (field.type) {
+  switch (type) {
     case InputTypes.TEXT:
     case InputTypes.EMAIL:
     case InputTypes.PASSWORD:
       return (
         <TextInput
+          {...field}
+          {...fieldSchema}
           {...htmlFields}
-          name={name}
           value={value}
-          type={type}
           isTouched={isTouched}
           handleBlur={handleBlur}
           handleChange={handleChange}

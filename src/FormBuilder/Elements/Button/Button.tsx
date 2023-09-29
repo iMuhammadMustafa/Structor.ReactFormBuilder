@@ -3,13 +3,26 @@ import { IButtons } from "./IButton.interface";
 
 const Buttons: React.FC<IButtons> = ({
   id = "form-submit",
-  text = "Submit",
+  text,
   type = "submit",
   cssClasses = "btn btn-primary mx-2 btn-sm",
   onClick,
   children,
   ...htmlProps
 }) => {
+  if (!text) {
+    switch (type) {
+      case "submit":
+        text = "Submit";
+        break;
+      case "reset":
+        text = "Clear";
+        break;
+      default:
+        text = "?";
+    }
+  }
+
   return (
     <>
       <button id={id} type={type} className={cssClasses} onClick={e => onClick && onClick(e)} {...htmlProps}>

@@ -40,12 +40,14 @@ const TextWithInvalidFeedBack: ITextInput = {
   errors: [
     {
       id: "invalid-feedback-Test-error-1",
+      name: "Invalid Feedback",
       text: "Invalid Feedback Text",
       message: "Invalid Feedback Message",
       field: "Test",
     },
     {
       id: "invalid-feedback-Test-error-2",
+      name: "Invalid Feedback",
       text: "Invalid Feedback Text 2",
       message: "Invalid Feedback Message 2",
       field: "Test",
