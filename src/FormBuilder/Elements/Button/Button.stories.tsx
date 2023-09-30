@@ -11,5 +11,6 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
+export const Base: Story = { args: { ...ButtonsMockProps.Base } };
 export const Submit: Story = { args: { ...ButtonsMockProps.Submit } };
 export const Clear: Story = { args: { ...ButtonsMockProps.Clear } };

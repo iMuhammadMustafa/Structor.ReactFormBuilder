@@ -3,10 +3,11 @@ import { memo } from "react";
 
 // import FormTest from "../../Form/FormTest";
 
-export interface IHelpText extends React.HTMLProps<HTMLDivElement> {
+export interface IHelpText {
   id: string;
   text?: string;
   cssClasses?: string;
+  htmlProps?: React.HTMLFactory<HTMLDivElement>;
   children?: React.ReactNode;
 }
 
@@ -36,7 +37,7 @@ export interface IHelpText extends React.HTMLProps<HTMLDivElement> {
 
          */
 
-const HelpText: React.FC<IHelpText> = ({ id, text, cssClasses = "form-text", children, ...htmlProps }) => {
+const HelpText: React.FC<IHelpText> = ({ id, text, cssClasses = "form-text", children, htmlProps }) => {
   return (
     <div id={id + "-helpText"} className={cssClasses} {...htmlProps}>
       {text}

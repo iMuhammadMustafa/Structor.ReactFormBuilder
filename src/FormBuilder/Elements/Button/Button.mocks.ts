@@ -1,5 +1,14 @@
-import { IButtons } from "./IButton.interface";
 import { action } from "@storybook/addon-actions";
+import { IButtons } from "./Button";
+
+const Base: IButtons = {
+  id: "form-base",
+  cssClasses: "btn btn-primary mx-2 btn-sm",
+  onClick: e => {
+    console.log("Base");
+    action("base")(e);
+  },
+};
 
 const Submit: IButtons = {
   id: "form-submit",
@@ -24,6 +33,7 @@ const Clear: IButtons = {
 };
 
 export const ButtonsMockProps = {
+  Base,
   Submit,
   Clear,
 };

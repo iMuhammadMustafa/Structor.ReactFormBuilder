@@ -13,3 +13,4 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Base: Story = { args: { ...HelpTextMockProps.Base } };
+export const WithChildren: Story = { args: { ...HelpTextMockProps.WithChildren } };

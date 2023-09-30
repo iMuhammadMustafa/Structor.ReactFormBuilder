@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import TextInput, { ITextInput } from "../Elements/Inputs/TextInput/TextInput";
 import { IField, InputTypes } from "../Types/Field";
 import { IError } from "../Types/Error";
-import { IButtons } from "../Elements/Button/IButton.interface";
 
 export interface IFieldBuilder {
   fieldSchema: ITextInput;
-  validationSchema?: any;
+  validationSchema?: IValidationSchema;
   value?: string;
   errors?: Array<IError>;
   handleInputBlur?: (target: IField | ITextInput, e: React.FocusEvent<HTMLInputElement>) => void;

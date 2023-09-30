@@ -5,16 +5,16 @@ import { InputTypes } from "./FormBuilder/Types/Field";
 import "./Demo.css";
 
 export function Demo() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   const [errors, setSerrors] = useState([]);
 
-  const checkIfUserExists = async ({ input, options }) => {
+  const checkIfUserExists = async ({ input, options }: any) => {
     const doesExist = await checkExternalUserExists(input);
     return !doesExist;
   };
 
-  async function checkExternalUserExists(input) {
-    return input === "Mohamed";
+  async function checkExternalUserExists(input: any) {
+    return input === "Admin";
   }
 
   let formSchema: IFormSchema = {
@@ -28,7 +28,7 @@ export function Demo() {
           name: "username",
           label: "Username",
           placeHolder: "Enter your username",
-          helpText: "Choose a unique username",
+          helpText: "Pick Admin to see validation error",
         },
         validationSchema: {
           customValidators: [
@@ -41,45 +41,50 @@ export function Demo() {
           isRequired: true,
         },
       },
-      // {
-      //   type: "email",
-      //   name: "email",
-      //   label: "Email",
-      //   placeHolder: "Enter your Email",
-      //   validationSchema: {
-      //     customValidators: [
-      //       {
-      //         name: "checkIfUserExists",
-      //         errorMessage: "Email already exists",
-      //         // validate: checkIfUserExists,
-      //       },
-      //     ],
-      //     isRequired: true,
-      //   },
-      // },
-      // {
-      //   type: "password",
-      //   name: "password",
-      //   label: "Password",
-      //   placeHolder: "Enter your username",
-      //   helpText: "Choose a unique username",
-      //   validationSchema: {
-      //     isRequired: true,
-      //     password: {
-      //       hasNumber: true,
-      //       minLength: 6,
-      //     },
-      //   },
-      // },
-      // {
-      //   type: "password",
-      //   name: "confirmPassword",
-      //   label: "Confirm Password",
-      //   validationSchema: {
-      //     isRequired: true,
-      //     matchField: { name: "Password", value: user?.password },
-      //   },
-      // },
+      {
+        fieldSchema: {
+          type: InputTypes.EMAIL,
+          name: "email",
+          label: "Email",
+          placeHolder: "Enter your Email",
+        },
+        validationSchema: {
+          isRequired: true,
+          isEmail: true,
+        },
+      },
+      {
+        fieldSchema: {
+          type: InputTypes.PASSWORD,
+          name: "password",
+          label: "Password",
+          placeHolder: "Password",
+          helpText: "Should be at least 8 characters long, contain at least 1 number and 1 special character.",
+        },
+        validationSchema: {
+          isRequired: true,
+          password: {
+            minLength: 8,
+            hasNumber: true,
+            hasLowerCase: true,
+            hasUpperCase: true,
+            hasSymbols: true,
+          },
+        },
+      },
+      {
+        fieldSchema: {
+          type: InputTypes.PASSWORD,
+          name: "confirmPassword",
+          label: "Confirm Password",
+          placeHolder: "Password",
+          helpText: "Should match password",
+        },
+        validationSchema: {
+          isRequired: true,
+          matchField: { name: "Password", value: user?.password },
+        },
+      },
     ],
   };
 

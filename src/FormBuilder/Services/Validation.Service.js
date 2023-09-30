@@ -48,7 +48,7 @@ export const validateBuiltInRules = (validationSchema, input, builtInRulesErrors
       };
       builtInRulesErrors = updateErrors(isValid, errorSchema, input, builtInRulesErrors);
     }
-    if (validationSchema.email) {
+    if (validationSchema.isEmail) {
       const isValid = validateEmailString(input.value);
       const errorSchema = {
         name: "email",

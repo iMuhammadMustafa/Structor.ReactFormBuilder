@@ -1,14 +1,23 @@
 import { memo } from "react";
-import { IButtons } from "./IButton.interface";
+
+export interface IButtons {
+  id?: string;
+  text?: string;
+  type?: "button" | "submit" | "reset" | undefined;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  cssClasses?: string;
+  htmlProps?: React.HTMLFactory<HTMLDivElement>;
+  children?: React.ReactNode;
+}
 
 const Buttons: React.FC<IButtons> = ({
-  id = "form-submit",
+  id,
   text,
-  type = "submit",
+  type = "button",
   cssClasses = "btn btn-primary mx-2 btn-sm",
   onClick,
   children,
-  ...htmlProps
+  htmlProps,
 }) => {
   if (!text) {
     switch (type) {
@@ -19,13 +28,13 @@ const Buttons: React.FC<IButtons> = ({
         text = "Clear";
         break;
       default:
-        text = "?";
+        text = "Click";
     }
   }
 
   return (
     <>
-      <button id={id} type={type} className={cssClasses} onClick={e => onClick && onClick(e)} {...htmlProps}>
+      <button type={type} id={id} className={cssClasses} onClick={onClick} {...htmlProps}>
         {text}
         {children}
       </button>
@@ -34,12 +43,30 @@ const Buttons: React.FC<IButtons> = ({
 };
 
 /**
- * @description
- * This is a memoized component that renders a button.
+ * Buttons Component
  *
- * @param {IButtons} props - The props object.
- * @returns {React.FC<IButtons>} - A memoized component that renders a button.
+ * This component renders a button element with optional properties.
+ *
+ * @component
+ * @param {string} [id] - The id attribute for the button element.
+ * @param {string} [text] - The text displayed on the button. Defaults to "Click" if not provided.
+ * @param {"button" | "submit" | "reset" | undefined} [type] - The type of button. Defaults to "button".
+ * @param {function} [onClick] - The function to be called when the button is clicked.
+ * @param {string} [cssClasses] - Additional CSS classes to be applied to the button.
+ * @param {Object} [htmlProps] - Additional HTML properties to be applied to the button.
+ * @param {React.ReactNode} [children] - Children components or elements to be rendered inside the button.
  * @example
- * <Buttons id="form-submit" text="Submit" cssClasses="btn btn-primary mx-2 btn-sm" onClick={e => console.log(e)} />
+ * // Example usage:
+ * <Buttons
+ *   id="my-button"
+ *   text="Click Me"
+ *   type="button"
+ *   cssClasses="custom-button"
+ *   onClick={(event) => {
+ *     console.log("Button clicked!");
+ *   }}
+ * >
+ *   <span>Custom Content</span>
+ * </Buttons>
  */
 export default memo(Buttons);
