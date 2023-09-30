@@ -4,6 +4,7 @@ import { IFieldBuilder } from "../FieldBuilder/FieldBuilder";
 export interface IForm {
   values: any;
   setValues: any;
+  setErrors?: any;
   schema: IFormSchema;
   handleFormSubmit: any;
   children?: React.ReactNode;

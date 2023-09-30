@@ -10,6 +10,7 @@ import { IField, InputTypes } from "../Types/Field";
 export default function Form({
   values,
   setValues,
+  setErrors,
   schema: { title, fields, clearBtn, dev = false },
   handleFormSubmit,
   children,
