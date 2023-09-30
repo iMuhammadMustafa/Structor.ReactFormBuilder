@@ -22,10 +22,12 @@
     "react/jsx-no-target-blank": "off",
     "array-callback-return": "warn",
     "react/prop-types": "off",
-    "no-debugger": "warn"
+    "no-debugger": "warn",
+    "react/display-name": "off"
   },
   "globals": {
     "describe": "writable",
-    "it": "writable"
+    "it": "writable",
+    "expect": "writable"
   }
 }
