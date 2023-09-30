@@ -1,6 +1,5 @@
 {
   "name": "structor-reactformbuilder",
-  "private": true,
   "version": "0.0.9",
   "type": "module",
   "scripts": {
