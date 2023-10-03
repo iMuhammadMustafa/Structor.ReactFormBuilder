@@ -22,47 +22,40 @@ type Story = StoryObj<typeof meta>;
 export const Base: Story = {
   args: {
     ...TextInputMockProps.Base,
-    ref: null, //Some Incompatibility between Storybook and React.HTMLProps<HTMLInputElement>?
   },
 };
 export const WithLabel: Story = {
   args: {
     ...TextInputMockProps.TextWithLabel,
-    ref: null, //Some Incompatibility between Storybook and React.HTMLProps<HTMLInputElement>?
   },
 };
 
 export const WithHelpText: Story = {
   args: {
     ...TextInputMockProps.TextWithHelpText,
-    ref: null, //Some Incompatibility between Storybook and React.HTMLProps<HTMLInputElement>?
   },
 };
 
 export const WithRequired: Story = {
   args: {
     ...TextInputMockProps.TextWithRequired,
-    ref: null, //Some Incompatibility between Storybook and React.HTMLProps<HTMLInputElement>?
   },
 };
 
 export const WithDisabled: Story = {
   args: {
     ...TextInputMockProps.TextWithDisabled,
-    ref: null, //Some Incompatibility between Storybook and React.HTMLProps<HTMLInputElement>?
   },
 };
 
 export const WithValidFeedback: Story = {
   args: {
     ...TextInputMockProps.TextWithValidFeedBack,
-    ref: null, //Some Incompatibility between Storybook and React.HTMLProps<HTMLInputElement>?
   },
 };
 
 export const WithInvalidFeedback: Story = {
   args: {
     ...TextInputMockProps.TextWithInvalidFeedBack,
-    ref: null, //Some Incompatibility between Storybook and React.HTMLProps<HTMLInputElement>?
   },
 };

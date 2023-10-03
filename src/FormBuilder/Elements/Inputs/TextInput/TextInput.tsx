@@ -1,22 +1,24 @@
-import { IError } from "@/FormBuilder/Types/Error";
 import { memo } from "react";
-import Label from "../../UI/Label/Label";
-import HelpText from "../../UI/HelpText/HelpText";
-import ValidFeedback from "../../UI/ValidFeedback/ValidFeedback";
-import InvalidFeedback from "../../UI/InvalidFeedback/InvalidFeedback";
+
+import { IError } from "@/FormBuilder/Types/Error";
 import { IField, InputTypes } from "@/FormBuilder/Types/Field";
 
+import HelpText from "../../UI/HelpText/HelpText";
+import InvalidFeedback from "../../UI/InvalidFeedback/InvalidFeedback";
+import Label from "../../UI/Label/Label";
+import ValidFeedback from "../../UI/ValidFeedback/ValidFeedback";
+
 export interface ITextInput extends IField {
-  label?: string | undefined;
+  label?: string;
   helpText?: string;
   placeHolder?: string;
   isTouched?: boolean;
-  isRequired?: boolean;
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   errors?: Array<IError>;
   cssClasses?: string;
   children?: React.ReactNode;
+  validationSchema?: IValidationSchema;
   htmlProps?: React.HTMLProps<HTMLInputElement>;
 }
 
@@ -29,19 +31,21 @@ function TextInput({
   helpText,
   placeHolder,
   isTouched,
-  isRequired,
   handleChange,
   handleBlur,
   errors,
   cssClasses = "form-control",
   htmlProps,
+  ...props
 }: ITextInput) {
   const isValid = isTouched && errors?.length === 0;
   const isInvalid = isTouched && errors && errors?.length > 0;
 
+  const isRequired = props?.validationSchema?.isRequired ?? false;
+
   return (
     <div className="mb-3 row">
-      {label && <Label id={id || name} className="col-sm-2 col-form-label" text={label} isRequired={isRequired} />}
+      {label && <Label id={id || name} cssClasses="col-sm-2 col-form-label" text={label} isRequired={isRequired} />}
       <div className="col-sm-10">
         <input
           type={type}

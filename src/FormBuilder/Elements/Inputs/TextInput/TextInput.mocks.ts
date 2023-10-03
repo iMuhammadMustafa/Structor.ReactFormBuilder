@@ -1,8 +1,11 @@
+import { InputTypes } from "@FormBuilder/Types/Field";
+
 import { ITextInput } from "./TextInput";
 
 const Base: ITextInput = {
   id: "TextInput",
   name: "Text Input",
+  type: InputTypes.TEXT,
 };
 
 const TextWithLabel: ITextInput = {
@@ -41,16 +44,15 @@ const TextWithInvalidFeedBack: ITextInput = {
     {
       id: "invalid-feedback-Test-error-1",
       name: "Invalid Feedback",
-      text: "Invalid Feedback Text",
+
       message: "Invalid Feedback Message",
-      field: "Test",
+      fieldName: "Test",
     },
     {
       id: "invalid-feedback-Test-error-2",
       name: "Invalid Feedback",
-      text: "Invalid Feedback Text 2",
       message: "Invalid Feedback Message 2",
-      field: "Test",
+      fieldName: "Test",
     },
   ],
   isTouched: true,
