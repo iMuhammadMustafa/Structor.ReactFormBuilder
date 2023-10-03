@@ -1,13 +1,15 @@
 import { memo } from "react";
+
 //extends React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
 //extends React.LabelHTMLAttributes<HTMLLabelElement>
 //React.HTMLAttributes<HTMLLabelElement>
-export interface ILabel extends React.HTMLProps<HTMLLabelElement> {
+export interface ILabel {
   id: string;
   text?: string;
   isRequired?: boolean;
   cssClasses?: string;
   requiredCssClasses?: string;
+  htmlProps?: React.HTMLProps<HTMLLabelElement>;
   children?: React.ReactNode;
 }
 

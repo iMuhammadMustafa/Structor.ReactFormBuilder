@@ -3,8 +3,9 @@ import { IError } from "./Error";
 export interface IField {
   id?: string;
   name: string;
-  value?: string;
+  value?: any;
   type: InputTypes;
+  label?: string;
   errors?: Array<IError>;
   parentName?: string;
   children?: React.ReactNode;

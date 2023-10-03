@@ -3,7 +3,7 @@ import { IError } from "../Types/Error";
 
 export interface IFieldsBuilder {
   fields: Array<IFieldBuilder>;
-  values?: any;
+  values?: never;
   setValues?: any;
   isFormCleared?: boolean;
   isFormSubmit?: boolean;

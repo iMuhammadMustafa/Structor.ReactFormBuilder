@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+
+import CheckBoxInput from "@FormBuilder/Elements/Inputs/CheckBoxInput/CheckBoxInput";
+
 import TextInput, { ITextInput } from "../Elements/Inputs/TextInput/TextInput";
-import { IField, InputTypes } from "../Types/Field";
 import { IError } from "../Types/Error";
+import { IField, InputTypes } from "../Types/Field";
 
 export interface IFieldBuilder {
-  fieldSchema: ITextInput;
+  fieldSchema: IField;
   validationSchema?: IValidationSchema;
-  value?: string;
+  value?: unknown;
   errors?: Array<IError>;
   handleInputBlur?: (target: IField | ITextInput, e: React.FocusEvent<HTMLInputElement>) => void;
   handleInputChange?: (target: IField | ITextInput, e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -31,7 +34,14 @@ export default function FieldBuilder(field: IFieldBuilder) {
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsTouched(true);
     if (handleInputChange) {
-      await handleInputChange({ name, value: e.target.value, type }, e);
+      switch (type) {
+        case InputTypes.CHECKBOX:
+          await handleInputChange({ name, value: e.target.checked, type }, e);
+          break;
+        default:
+          await handleInputChange({ name, value: e.target.value, type }, e);
+          break;
+      }
     }
   };
 
@@ -49,6 +59,19 @@ export default function FieldBuilder(field: IFieldBuilder) {
   }, [isFormCleared]);
 
   switch (type) {
+    case InputTypes.CHECKBOX:
+      return (
+        <CheckBoxInput
+          {...field}
+          {...fieldSchema}
+          {...htmlFields}
+          label={fieldSchema.label}
+          value={value}
+          isTouched={isTouched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+      );
     case InputTypes.TEXT:
     case InputTypes.EMAIL:
     case InputTypes.PASSWORD:

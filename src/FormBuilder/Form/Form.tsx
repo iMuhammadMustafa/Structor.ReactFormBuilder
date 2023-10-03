@@ -1,16 +1,16 @@
-import { useEffect, useReducer, useRef } from "react";
-import { FormActionsTypes, IForm, IFormAction, IFormState } from "./Form.types";
-import DevInfo from "./DevInfo";
-import FieldsBuilder from "../FieldsBuilder/FieldsBuilder";
+import { useReducer, useRef } from "react";
+
 import Button from "../Elements/Button/Button";
-import { IError } from "../Types/Error";
+import FieldsBuilder from "../FieldsBuilder/FieldsBuilder";
 import { ValidateFormInputs } from "../Services/Validation.Service";
+import { IError } from "../Types/Error";
 import { IField, InputTypes } from "../Types/Field";
+import DevInfo from "./DevInfo";
+import { FormActionsTypes, IForm, IFormAction, IFormState } from "./Form.types";
 
 export default function Form({
   values,
   setValues,
-  setErrors,
   schema: { title, fields, clearBtn, dev = false },
   handleFormSubmit,
   children,
@@ -97,18 +97,35 @@ export default function Form({
       validationSchema: formField?.validationSchema,
     };
     clearTimeout(timerRef.current as NodeJS.Timeout);
-    timerRef.current = setTimeout(async () => {
-      const inputErrors = await ValidateFormInputs(formState.errors, inputField, field.value);
-      formStateDispatch({ type: FormActionsTypes.UPDATE_ERRORS, payload: inputErrors });
-    }, 1000);
+
+    timerRef.current = setTimeout(
+      async () => {
+        const inputErrors = await ValidateFormInputs(formState.errors, inputField, field.value);
+        formStateDispatch({ type: FormActionsTypes.UPDATE_ERRORS, payload: inputErrors });
+      },
+      field.type == InputTypes.CHECKBOX ? 0 : 1000,
+    );
+
+    // switch (field.type) {
+    //   case InputTypes.CHECKBOX: {
+    //     const inputErrors = await ValidateFormInputs(formState.errors, inputField, field.value);
+    //     formStateDispatch({ type: FormActionsTypes.UPDATE_ERRORS, payload: inputErrors });
+    //     break;
+    //   }
+    //   default:
+    //     timerRef.current = setTimeout(async () => {
+    //       const inputErrors = await ValidateFormInputs(formState.errors, inputField, field.value);
+    //       formStateDispatch({ type: FormActionsTypes.UPDATE_ERRORS, payload: inputErrors });
+    //     }, field.type == InputTypes.CHECKBOX ? 0 : 1000);
+    // }
   };
 
-  const updateValues = (field: IField, e: React.ChangeEvent<HTMLInputElement>) => {
+  const updateValues = (field: IField, _e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, value, parentName } = { ...field };
     switch (type) {
-      // case InputTypes.CHECKBOX:
-      //   setValues({ ...values, [name]: e.target.checked });
-      //   break;
+      case InputTypes.CHECKBOX:
+        setValues({ ...values, [name]: value });
+        break;
       // case InputTypes.GROUP:
       case InputTypes.TEXT:
       case InputTypes.EMAIL:

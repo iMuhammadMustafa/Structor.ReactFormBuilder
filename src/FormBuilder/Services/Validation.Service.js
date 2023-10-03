@@ -16,7 +16,7 @@ export const ValidateFormInputs = async (errors, { name, label, validationSchema
 export const validateBuiltInRules = (validationSchema, input, builtInRulesErrors) => {
   if (validationSchema.isRequired) {
     const isValid = input.value ? true : false;
-    const errorSchema = { name: "isRequired", message: `This field is required`, type: errorTypes.BUILT_IN };
+    const errorSchema = { name: "isRequired", message: "This field is required", type: errorTypes.BUILT_IN };
     builtInRulesErrors = updateErrors(isValid, errorSchema, input, builtInRulesErrors);
   }
 

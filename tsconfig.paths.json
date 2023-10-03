@@ -2,8 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@Shared/*": ["./src/Shared/*"],
-      "@Modules/*": ["./src/Modules/*"],
+      "@FormBuilder/*": ["./src/FormBuilder/*"],
       "@/*": ["./src/*"]
     }
   }
