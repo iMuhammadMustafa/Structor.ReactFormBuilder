@@ -1,8 +1,9 @@
 import { useState } from "react";
+
+import "./Demo.css";
 import Form from "./FormBuilder/Form/Form";
 import { IForm, IFormSchema } from "./FormBuilder/Form/Form.types";
 import { InputTypes } from "./FormBuilder/Types/Field";
-import "./Demo.css";
 
 export function Demo() {
   const [user, setUser] = useState({});
@@ -28,7 +29,7 @@ export function Demo() {
           name: "username",
           label: "Username",
           placeHolder: "Enter your username",
-          helpText: "Pick Admin to see validation error",
+          helpText: "Write Admin to see validation error",
         },
         validationSchema: {
           customValidators: [
@@ -85,6 +86,16 @@ export function Demo() {
           matchField: { name: "Password", value: user?.password },
         },
       },
+      {
+        fieldSchema: {
+          type: InputTypes.CHECKBOX,
+          name: "terms",
+          label: "I agree to the terms and conditions",
+        },
+        validationSchema: {
+          isRequired: true,
+        },
+      },
     ],
   };
 
@@ -132,7 +143,7 @@ export function Demo() {
 
   // output(syntaxHighlight(JSON.stringify(formSchema)));
 
-  const handleSChemaChange = e => {
+  const handleSChemaChange = (e: any) => {
     formSchema = e.target.value;
     console.log(e.target.value);
   };
@@ -140,14 +151,14 @@ export function Demo() {
   return (
     <>
       <div className="text-center">Structor React Form Builder</div>
-      <div className="row">
+      <br />
+      <Form schema={formSchema} values={user} setValues={setUser} handleFormSubmit={handleFormSubmit}></Form>
+      {/* <div className="row">
         {/* <div className="col-4" id="showCodeHere">
           <textarea id="showCodeHere" onChange={handleSChemaChange} value={JSON.stringify(formSchema)}></textarea>
-        </div> */}
-        <div className="col-12">
-          <Form schema={formSchema} values={user} setValues={setUser} handleFormSubmit={handleFormSubmit}></Form>
-        </div>
-      </div>
+        </div> 
+        <div className="col-12"></div> 
+      </div>*/}
     </>
   );
 }
