@@ -4,7 +4,7 @@ import TemplateComponent from "./TemplateComponent";
 import TemplateComponentMockProps from "./TemplateComponent.mocks";
 
 const meta = {
-  title: "TemplateComponent",
+  title: "Template/TemplateComponent",
   component: TemplateComponent,
 } satisfies Meta<typeof TemplateComponent>;
 
