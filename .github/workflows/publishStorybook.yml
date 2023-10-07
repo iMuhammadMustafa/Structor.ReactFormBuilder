@@ -7,9 +7,8 @@ on: push
 #List of jobs
 
 jobs:
-  name: "Publish Storybook"
+  publish_storybook:
 		runs-on: ubuntu-latest
-		#Job Steps
 		steps:
 			- name: checkout
 				uses: actions/checkout@v4
