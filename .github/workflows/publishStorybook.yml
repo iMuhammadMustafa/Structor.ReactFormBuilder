@@ -8,7 +8,6 @@ on: push
 
 jobs:
   name: "Publish Storybook"
-	#Operating System
 		runs-on: ubuntu-latest
 		#Job Steps
 		steps:
