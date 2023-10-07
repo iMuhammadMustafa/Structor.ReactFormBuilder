@@ -30,6 +30,7 @@ const Valid: ICheckBoxInput = {
   id: "CheckBoxInputInValid",
   name: "CheckBoxInputInValid",
   isTouched: true,
+  errors: [],
   validationSchema: {
     isRequired: false,
   },
