@@ -2,6 +2,17 @@
 
 Structor is a series of repositories that I inteded them to be building blocks for future projects.
 
+[Documentation](https://reactformbuilder.muhammadmustafa.dev/?path=/docs/form-form--docs)
+
+NPM: [![https://nodei.co/npm/structor-reactformbuilder.png?mini=true&downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/structor-reactformbuilder.png?mini=truedownloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/structor-reactformbuilder)
+
+```bash
+npm install --dev structor-reactformbuilder
+```
+```bash
+yarn add --dev structor-reactformbuilder
+```
+
 ## React Form Builder
 
 This is a form builder for React, It's aimed to be very developer friendly and straight forward; you pass a schema in the form of Javascript Object to the Form Component and it builds the form. 
