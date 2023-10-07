@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import CheckBoxInput from "@FormBuilder/Elements/Inputs/CheckBoxInput/CheckBoxInput";
+import Dropdown from "@FormBuilder/Elements/Inputs/Dropdown/Dropdown";
 
 import TextInput, { ITextInput } from "../Elements/Inputs/TextInput/TextInput";
 import { IError } from "../Types/Error";
@@ -11,8 +12,12 @@ export interface IFieldBuilder {
   validationSchema?: IValidationSchema;
   value?: unknown;
   errors?: Array<IError>;
-  handleInputBlur?: (target: IField | ITextInput, e: React.FocusEvent<HTMLInputElement>) => void;
-  handleInputChange?: (target: IField | ITextInput, e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputBlur?:
+    | ((target: IField | ITextInput, e: React.FocusEvent<HTMLInputElement>) => void)
+    | ((target: IField | ITextInput, e: React.FocusEvent<HTMLSelectElement>) => void);
+  handleInputChange?:
+    | ((target: IField | ITextInput, e: React.ChangeEvent<HTMLInputElement>) => void)
+    | ((target: IField | ITextInput, e: React.ChangeEvent<HTMLSelectElement>) => void);
   isFormSubmit?: boolean;
   isFormCleared?: boolean;
   children?: React.ReactNode;
@@ -25,13 +30,13 @@ export default function FieldBuilder(field: IFieldBuilder) {
   const { name, type } = { ...fieldSchema };
   const [isTouched, setIsTouched] = useState(false);
 
-  const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = async (e: React.FocusEvent<any>) => {
     setIsTouched(true);
     if (handleInputBlur) {
       await handleInputBlur({ name, value, type }, e);
     }
   };
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<any>) => {
     setIsTouched(true);
     if (handleInputChange) {
       switch (type) {
@@ -62,6 +67,19 @@ export default function FieldBuilder(field: IFieldBuilder) {
     case InputTypes.CHECKBOX:
       return (
         <CheckBoxInput
+          {...field}
+          {...fieldSchema}
+          {...htmlFields}
+          label={fieldSchema.label}
+          value={value}
+          isTouched={isTouched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+      );
+    case InputTypes.DROPDOWN:
+      return (
+        <Dropdown
           {...field}
           {...fieldSchema}
           {...htmlFields}

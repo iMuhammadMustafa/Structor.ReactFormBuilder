@@ -88,6 +88,19 @@ export function Demo() {
       },
       {
         fieldSchema: {
+          type: InputTypes.DROPDOWN,
+          name: "gender",
+          label: "Gender",
+          helpText: "You don't have to pick one",
+          options: [
+            { label: "Male", value: "male" },
+            { label: "Female", value: "female" },
+            { label: "Prefer Not To Choose", value: "nothing" },
+          ],
+        },
+      },
+      {
+        fieldSchema: {
           type: InputTypes.CHECKBOX,
           name: "terms",
           label: "I agree to the terms and conditions",

@@ -10,8 +10,6 @@ import ValidFeedback from "../../UI/ValidFeedback/ValidFeedback";
 
 export interface ITextInput extends IField {
   label?: string;
-  helpText?: string;
-  placeHolder?: string;
   isTouched?: boolean;
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;

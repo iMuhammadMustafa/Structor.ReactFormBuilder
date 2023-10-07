@@ -5,7 +5,7 @@ import CheckBoxInput from "./CheckBoxInput";
 import CheckBoxInputMockProps from "./CheckBoxInput.mocks";
 
 const meta = {
-  title: "CheckBoxInput",
+  title: "FormBuilder/Inputs/CheckBoxInput",
   component: CheckBoxInput,
 } satisfies Meta<typeof CheckBoxInput>;
 

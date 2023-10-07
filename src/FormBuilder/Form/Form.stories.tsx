@@ -4,7 +4,7 @@ import Form from "./Form";
 import FormMockProps from "./Form.mocks";
 
 const meta = {
-  title: "Form",
+  title: "FormBuilder/Form",
   component: Form,
 } satisfies Meta<typeof Form>;
 

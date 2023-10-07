@@ -21,7 +21,7 @@ const TextWithHelpText: ITextInput = {
 
 const TextWithRequired: ITextInput = {
   ...TextWithLabel,
-  isRequired: true,
+  validationSchema: { isRequired: true },
 };
 
 const TextWithDisabled: ITextInput = {
