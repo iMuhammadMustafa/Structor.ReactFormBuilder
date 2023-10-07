@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react";
+
 import "../src/index.scss";
 
 const preview: Preview = {
@@ -8,6 +9,11 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
+      },
+    },
+    options: {
+      storySort: {
+        order: ["Form", ["Form", ["Base"]]],
       },
     },
   },
