@@ -7,7 +7,7 @@ on: push
 #List of jobs
 
 jobs:
-  publish_storybook:
+	publish_storybook:
 		runs-on: ubuntu-latest
 		steps:
 			- name: checkout
@@ -22,5 +22,5 @@ jobs:
 			- name: Publish to Storybook
 				uses: chromaui/action@v1
 				with:
-						projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-						token: ${{ secrets.GITHUB_TOKEN }}
+					projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+					token: ${{ secrets.GITHUB_TOKEN }}
