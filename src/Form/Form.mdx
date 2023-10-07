@@ -1,0 +1,242 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+
+import * as formStories from "./Form.stories";
+import Form from "./Form";
+import FormMockProps from "./Form.mocks";
+
+<Meta of={formStories} />
+
+# Form
+
+This is the base component. Usage:
+
+```tsx
+const [values, setValues] = useState({});
+
+const handleFormSubmit = (values: any) => {
+  console.log(values);
+};
+
+<Form schema={formSchema} values={user} setValues={setUser} handleFormSubmit={handleFormSubmit} />;
+```
+
+Schema is a JSON object that defines the form structure. It is used to generate the form and validate the form data.
+
+```tsx
+IFormSchema {
+  title?: string;               // Title of the form
+  fields: Array<IFieldBuilder>; // Array of fields
+  dev?: boolean;                // Show dev tools
+  clearBtn?: boolean;           // Show clear button
+}
+```
+
+The fields should have the following structure:
+
+```tsx
+IFieldBuilder {
+  fieldSchema: IField;
+  validationSchema?: IValidationSchema;
+}
+```
+
+Example of a FieldBuilder:
+
+```tsx
+      fieldSchema: {
+        type: InputTypes.TEXT,
+        name: "username",
+        label: "Username",
+        placeHolder: "Enter your username",
+        helpText: "Write Admin to see validation error",
+      },
+      validationSchema: {
+        customValidators: [
+          {
+            name: "checkIfUserExists",                  // Name of the custom Validator
+            errorMessage: "Username already exists",    // Error Message
+            validate: checkIfUserExists,                // The function that will be called to validate the field
+          },
+        ],
+        isRequired: true,
+      }
+```
+
+```tsx
+export interface IField {
+  id?: string;
+  name: string;
+  value?: any;
+  placeHolder?: string;
+  helpText?: string;
+  type: InputTypes;
+  label?: string;
+  options?: Array<IOption>;
+  errors?: Array<IError>;
+  validationSchema?: IValidationSchema;
+  parentName?: string;
+  children?: React.ReactNode;
+}
+
+IOption {
+  label: string;
+  value: string;
+}
+
+enum InputTypes {
+  TEXT = "text",
+  EMAIL = "email",
+  CHECKBOX = "checkbox",
+  PASSWORD = "password",
+  DROPDOWN = "dropdown",
+  GROUP = "group",
+  BUTTON = "button",
+}
+```
+
+The Validation Schema:
+
+```tsx
+interface IValidationSchema {
+  minLength?: number;
+  maxLength?: number;
+  pattern?: RegExp;
+  isRequired?: boolean;
+  isEmail?: boolean;
+  password?: IPasswordValidationSchema;
+  matchField?: {
+    name: string;
+    value: string;
+  };
+  customValidators?: Array<ICustomValidator>;
+}
+
+interface IPasswordValidationSchema {
+  isRequired?: boolean;
+  hasNumber?: boolean;
+  hasLowerCase?: boolean;
+  hasUpperCase?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  hasSymbols?: boolean;
+}
+interface ICustomValidator {
+  name: string;
+  errorMessage: string;
+  validate: ({ input, options }: any) => Promise<boolean>;
+}
+```
+
+The Custom Validator should have the following structure:
+It should return a boolean value that is true if the field is valid and false if it is not.
+
+```tsx
+const checkIfUserExists = async ({ input, options }: any) => {
+  const doesExist = await checkExternalUserExists(input);
+  return !doesExist;
+};
+```
+
+Example of a Schema:
+
+```tsx
+let formSchema: IFormSchema = {
+  title: "Register",
+  clearBtn: true,
+  dev: true,
+  fields: [
+    {
+      fieldSchema: {
+        type: InputTypes.TEXT,
+        name: "username",
+        label: "Username",
+        placeHolder: "Enter your username",
+        helpText: "Write Admin to see validation error",
+      },
+      validationSchema: {
+        customValidators: [
+          {
+            name: "checkIfUserExists",
+            errorMessage: "Username already exists",
+            validate: checkIfUserExists,
+          },
+        ],
+        isRequired: true,
+      },
+    },
+    {
+      fieldSchema: {
+        type: InputTypes.EMAIL,
+        name: "email",
+        label: "Email",
+        placeHolder: "Enter your Email",
+      },
+      validationSchema: {
+        isRequired: true,
+        isEmail: true,
+      },
+    },
+    {
+      fieldSchema: {
+        type: InputTypes.PASSWORD,
+        name: "password",
+        label: "Password",
+        placeHolder: "Password",
+        helpText: "Should be at least 8 characters long, contain at least 1 number and 1 special character.",
+      },
+      validationSchema: {
+        isRequired: true,
+        password: {
+          minLength: 8,
+          hasNumber: true,
+          hasLowerCase: true,
+          hasUpperCase: true,
+          hasSymbols: true,
+        },
+      },
+    },
+    {
+      fieldSchema: {
+        type: InputTypes.PASSWORD,
+        name: "confirmPassword",
+        label: "Confirm Password",
+        placeHolder: "Password",
+        helpText: "Should match password",
+      },
+      validationSchema: {
+        isRequired: true,
+        matchField: { name: "Password", value: user?.password },
+      },
+    },
+    {
+      fieldSchema: {
+        type: InputTypes.DROPDOWN,
+        name: "gender",
+        label: "Gender",
+        helpText: "You don't have to pick one",
+        options: [
+          { label: "Male", value: "male" },
+          { label: "Female", value: "female" },
+          { label: "Prefer Not To Choose", value: "nothing" },
+        ],
+      },
+    },
+    {
+      fieldSchema: {
+        type: InputTypes.CHECKBOX,
+        name: "terms",
+        label: "I agree to the terms and conditions",
+      },
+      validationSchema: {
+        isRequired: true,
+      },
+    },
+  ],
+};
+```
+
+Will result in the following
+
+<Canvas className="bg-dark">
+  <Story component={<Form {...FormMockProps.Base} />} />
+</Canvas>

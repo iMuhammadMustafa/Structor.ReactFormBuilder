@@ -11,9 +11,10 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    backgrounds: { default: "dark" },
     options: {
       storySort: {
-        order: ["Form", ["Form", ["Base"]]],
+        order: ["Form", ["Form", ["Base"]], "Builder", "Inputs", "UI"],
       },
     },
   },

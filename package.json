@@ -23,6 +23,7 @@
     "react-router-dom": "^6.9.0"
   },
   "devDependencies": {
+    "@storybook/addon-docs": "^7.4.6",
     "@storybook/addon-essentials": "7.4.2",
     "@storybook/addon-interactions": "7.4.2",
     "@storybook/addon-links": "7.4.2",
