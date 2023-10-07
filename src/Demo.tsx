@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 import "./Demo.css";
-import Form from "./FormBuilder/Form/Form";
-import { IForm, IFormSchema } from "./FormBuilder/Form/Form.types";
-import { InputTypes } from "./FormBuilder/Types/Field";
+import Form from "./Form/Form";
+import { IForm, IFormSchema } from "./Form/Form.types";
+import { InputTypes } from "./Types/Field";
 
 export function Demo() {
   const [user, setUser] = useState({});
