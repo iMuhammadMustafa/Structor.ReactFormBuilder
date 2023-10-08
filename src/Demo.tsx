@@ -22,6 +22,23 @@ export function Demo() {
     title: "Register",
     clearBtn: true,
     dev: true,
+    defaultStyles: {
+      title: "text-center mb-3",
+      form: "row",
+      buttons: {
+        wrapper: "text-center",
+        submit: "btn btn-primary mx-2 btn-sm",
+        clear: "btn btn-danger mx-2 btn-sm",
+      },
+      inputs: {
+        fieldWrapper: "mb-3 row",
+        inputWrapper: "col-sm-10",
+        input: "form-control",
+        label: "col-sm-2 col-form-label",
+        placeHolder: "",
+        helpText: "form-text",
+      },
+    },
     fields: [
       {
         fieldSchema: {
@@ -30,6 +47,14 @@ export function Demo() {
           label: "Username",
           placeHolder: "Enter your username",
           helpText: "Write Admin to see validation error",
+        },
+        stylesSchema: {
+          fieldWrapper: "mb-3 row",
+          inputWrapper: "col-sm-10",
+          input: "form-control",
+          label: "col-sm-2 col-form-label",
+          placeHolder: "",
+          helpText: "form-text",
         },
         validationSchema: {
           customValidators: [
@@ -98,6 +123,9 @@ export function Demo() {
             { label: "Prefer Not To Choose", value: "nothing" },
           ],
         },
+        stylesSchema: {
+          input: "form-select",
+        },
       },
       {
         fieldSchema: {
@@ -107,6 +135,12 @@ export function Demo() {
         },
         validationSchema: {
           isRequired: true,
+        },
+        stylesSchema: {
+          fieldWrapper: "mb-3 row",
+          inputWrapper: "form-check col-sm-10 offset-sm-2",
+          input: "form-check-input me-2 ",
+          label: "form-check-label",
         },
       },
     ],
@@ -165,7 +199,9 @@ export function Demo() {
     <>
       <div className="text-center">Structor React Form Builder</div>
       <br />
-      <Form schema={formSchema} values={user} setValues={setUser} handleFormSubmit={handleFormSubmit}></Form>
+      <div className="container text-light col-7">
+        <Form schema={formSchema} values={user} setValues={setUser} handleFormSubmit={handleFormSubmit}></Form>
+      </div>
       {/* <div className="row">
         {/* <div className="col-4" id="showCodeHere">
           <textarea id="showCodeHere" onChange={handleSChemaChange} value={JSON.stringify(formSchema)}></textarea>

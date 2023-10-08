@@ -28,8 +28,35 @@ IFormSchema {
   fields: Array<IFieldBuilder>; // Array of fields
   dev?: boolean;                // Show dev tools
   clearBtn?: boolean;           // Show clear button
+  defaultStyles?: IFormStyles; // Default styles for the form and inputs
 }
 ```
+
+Styles will have the following structure: (You should provide the css classes as a string)
+
+````tsx
+IFormStyles {
+  title?: string;           // Title of the form
+  form?: string;            // Form wrapper
+  buttons?: {               // Buttons
+    wrapper?: string;       // Wrapper
+    submit?: string;        // Submit button
+    clear?: string;         // Clear button
+  };
+  inputs?: IStylesSchema;
+}```
+
+The input styles will have the following structure: (Default styles are used if no styles are provided)
+```tsx
+IStylesSchema {
+  fieldWrapper?: string;
+  inputWrapper?: string;
+  input?: string;
+  label?: string;
+  placeHolder?: string;
+  helpText?: string;
+}
+````
 
 The fields should have the following structure:
 
@@ -37,6 +64,7 @@ The fields should have the following structure:
 IFieldBuilder {
   fieldSchema: IField;
   validationSchema?: IValidationSchema;
+  IStylesSchema?: IStylesSchema;
 }
 ```
 
@@ -59,6 +87,14 @@ Example of a FieldBuilder:
           },
         ],
         isRequired: true,
+      },
+      stylesSchema: {
+        fieldWrapper: "mb-3 row",
+        inputWrapper: "col-sm-10",
+        input: "form-control",
+        label: "col-sm-2 col-form-label",
+        placeHolder: "",
+        helpText: "form-text",
       }
 ```
 
@@ -144,6 +180,23 @@ let formSchema: IFormSchema = {
   title: "Register",
   clearBtn: true,
   dev: true,
+  defaultStyles: {
+    title: "text-center mb-3",
+    form: "row",
+    buttons: {
+      wrapper: "text-center",
+      submit: "btn btn-primary mx-2 btn-sm",
+      clear: "btn btn-danger mx-2 btn-sm",
+    },
+    inputs: {
+      fieldWrapper: "mb-3 row",
+      inputWrapper: "col-sm-10",
+      input: "form-control",
+      label: "col-sm-2 col-form-label",
+      placeHolder: "",
+      helpText: "form-text",
+    },
+  },
   fields: [
     {
       fieldSchema: {
@@ -152,6 +205,14 @@ let formSchema: IFormSchema = {
         label: "Username",
         placeHolder: "Enter your username",
         helpText: "Write Admin to see validation error",
+      },
+      stylesSchema: {
+        fieldWrapper: "mb-3 row",
+        inputWrapper: "col-sm-10",
+        input: "form-control",
+        label: "col-sm-2 col-form-label",
+        placeHolder: "",
+        helpText: "form-text",
       },
       validationSchema: {
         customValidators: [
@@ -220,6 +281,9 @@ let formSchema: IFormSchema = {
           { label: "Prefer Not To Choose", value: "nothing" },
         ],
       },
+      stylesSchema: {
+        input: "form-select",
+      },
     },
     {
       fieldSchema: {
@@ -229,6 +293,12 @@ let formSchema: IFormSchema = {
       },
       validationSchema: {
         isRequired: true,
+      },
+      stylesSchema: {
+        fieldWrapper: "mb-3 row",
+        inputWrapper: "form-check col-sm-10 offset-sm-2",
+        input: "form-check-input me-2 ",
+        label: "form-check-label",
       },
     },
   ],

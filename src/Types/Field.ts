@@ -1,3 +1,5 @@
+import { IFormStyles, IStylesSchema } from "@/Form/Form.types";
+
 import { IError } from "./Error";
 
 export interface IField {
@@ -10,7 +12,10 @@ export interface IField {
   label?: string;
   options?: Array<IOption>;
   errors?: Array<IError>;
+  isTouched?: boolean;
   validationSchema?: IValidationSchema;
+  defaultStyles?: IFormStyles;
+  stylesSchema?: IStylesSchema;
   parentName?: string;
   children?: React.ReactNode;
 }

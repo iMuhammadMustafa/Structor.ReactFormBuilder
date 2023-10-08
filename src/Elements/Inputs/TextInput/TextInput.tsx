@@ -9,14 +9,8 @@ import Label from "../../UI/Label/Label";
 import ValidFeedback from "../../UI/ValidFeedback/ValidFeedback";
 
 export interface ITextInput extends IField {
-  label?: string;
-  isTouched?: boolean;
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  errors?: Array<IError>;
-  cssClasses?: string;
-  children?: React.ReactNode;
-  validationSchema?: IValidationSchema;
   htmlProps?: React.HTMLProps<HTMLInputElement>;
 }
 
@@ -32,7 +26,9 @@ function TextInput({
   handleChange,
   handleBlur,
   errors,
-  cssClasses = "form-control",
+  defaultStyles,
+  stylesSchema,
+  // cssClasses = "form-control",
   htmlProps,
   ...props
 }: ITextInput) {
@@ -41,13 +37,19 @@ function TextInput({
 
   const isRequired = props?.validationSchema?.isRequired ?? false;
 
+  const fieldWrapper = stylesSchema?.fieldWrapper ?? defaultStyles?.inputs?.fieldWrapper;
+  const inputWrapper = stylesSchema?.inputWrapper ?? defaultStyles?.inputs?.inputWrapper;
+  const inputStyles = stylesSchema?.input ?? defaultStyles?.inputs?.input;
+  const labelStyles = stylesSchema?.label ?? defaultStyles?.inputs?.label;
+  const helpTextStyles = stylesSchema?.helpText ?? defaultStyles?.inputs?.helpText;
+
   return (
-    <div className="mb-3 row">
-      {label && <Label id={id || name} cssClasses="col-sm-2 col-form-label" text={label} isRequired={isRequired} />}
-      <div className="col-sm-10">
+    <div className={fieldWrapper}>
+      {label && <Label id={id || name} cssClasses={labelStyles} text={label} isRequired={isRequired} />}
+      <div className={inputWrapper}>
         <input
           type={type}
-          className={`${cssClasses} ${isValid ? "is-valid" : ""} ${isInvalid ? "is-invalid" : ""}`}
+          className={`${inputStyles} ${isValid ? "is-valid" : ""} ${isInvalid ? "is-invalid" : ""}`}
           id={id || name}
           name={name}
           onChange={handleChange}
@@ -56,7 +58,7 @@ function TextInput({
           placeholder={placeHolder ?? label ?? name}
           {...htmlProps}
         />
-        {helpText && <HelpText id={id || name} text={helpText} />}
+        {helpText && <HelpText id={id || name} text={helpText} cssClasses={helpTextStyles} />}
         {(!errors || errors?.length === 0) && <ValidFeedback id={id || name} />}
         {errors && errors?.length > 0 && <InvalidFeedback id={id || name} errors={errors} />}
       </div>

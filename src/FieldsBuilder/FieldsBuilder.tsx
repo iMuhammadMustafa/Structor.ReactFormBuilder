@@ -1,3 +1,5 @@
+import { IFormStyles } from "@/Form/Form.types";
+
 import FieldBuilder, { IFieldBuilder } from "../FieldBuilder/FieldBuilder";
 import { IError } from "../Types/Error";
 
@@ -5,6 +7,7 @@ export interface IFieldsBuilder {
   fields: Array<IFieldBuilder>;
   values?: any;
   setValues?: any;
+  defaultStyles?: IFormStyles;
   isFormCleared?: boolean;
   isFormSubmit?: boolean;
   handleInputChange?: any;
@@ -24,6 +27,7 @@ export default function FieldsBuilder(props: IFieldsBuilder) {
         {...field}
         key={field.fieldSchema.type + index}
         value={values ? values[field.fieldSchema.name] : ""}
+        defaultStyles={props.defaultStyles}
         // setValues={setValues}
         handleInputChange={handleInputChange}
         handleInputBlur={handleInputBlur}

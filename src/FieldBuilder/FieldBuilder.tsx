@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import CheckBoxInput from "@/Elements/Inputs/CheckBoxInput/CheckBoxInput";
 import Dropdown from "@/Elements/Inputs/Dropdown/Dropdown";
+import { IFormStyles, IStylesSchema } from "@/Form/Form.types";
 
 import TextInput, { ITextInput } from "../Elements/Inputs/TextInput/TextInput";
 import { IError } from "../Types/Error";
@@ -10,6 +11,8 @@ import { IField, InputTypes } from "../Types/Field";
 export interface IFieldBuilder {
   fieldSchema: IField;
   validationSchema?: IValidationSchema;
+  defaultStyles?: IFormStyles;
+  stylesSchema?: IStylesSchema;
   value?: unknown;
   errors?: Array<IError>;
   handleInputBlur?:
@@ -70,7 +73,6 @@ export default function FieldBuilder(field: IFieldBuilder) {
           {...field}
           {...fieldSchema}
           {...htmlFields}
-          label={fieldSchema.label}
           value={value}
           isTouched={isTouched}
           handleBlur={handleBlur}
@@ -83,7 +85,6 @@ export default function FieldBuilder(field: IFieldBuilder) {
           {...field}
           {...fieldSchema}
           {...htmlFields}
-          label={fieldSchema.label}
           value={value}
           isTouched={isTouched}
           handleBlur={handleBlur}

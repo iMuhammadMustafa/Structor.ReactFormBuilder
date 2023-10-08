@@ -7,43 +7,44 @@ import ValidFeedback from "@/Elements/UI/ValidFeedback/ValidFeedback";
 import { IField } from "@/Types/Field";
 
 export interface ICheckBoxInput extends IField {
-  label?: string;
-  helpText?: string;
-  isTouched?: boolean;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  validationSchema?: IValidationSchema;
   children?: React.ReactNode;
 }
 
 function CheckBoxInput(props: ICheckBoxInput) {
   const { id, name, type, label, value, helpText, isTouched, handleChange, handleBlur, errors } = { ...props };
+  const { defaultStyles, stylesSchema } = { ...props };
 
   const isValid = isTouched && errors?.length === 0;
   const isInvalid = isTouched && errors && errors?.length > 0;
 
   const isRequired = props?.validationSchema?.isRequired ?? false;
 
-  return (
-    <div className="mb-3">
-      <div className="col-sm-10 offset-sm-2">
-        <div className="form-check">
-          <input
-            id={id || name}
-            name={name}
-            type="checkbox"
-            role={type}
-            className={`form-check-input ${isValid ? "is-valid" : ""} ${isInvalid ? "is-invalid" : ""}`}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={value || ""}
-          />
-          <Label id={id || name} text={label} cssClasses="form-check-label" isRequired={isRequired} />
+  const fieldWrapper = stylesSchema?.fieldWrapper ?? defaultStyles?.inputs?.fieldWrapper;
+  const inputWrapper = stylesSchema?.inputWrapper ?? defaultStyles?.inputs?.inputWrapper;
+  const inputStyles = stylesSchema?.input ?? defaultStyles?.inputs?.input;
+  const labelStyles = stylesSchema?.label ?? defaultStyles?.inputs?.label;
+  const helpTextStyles = stylesSchema?.helpText ?? defaultStyles?.inputs?.helpText;
 
-          {helpText && <HelpText id={id || name} text={helpText} />}
-          {(!errors || errors.length === 0) && <ValidFeedback id={id || name} />}
-          {errors && errors.length > 0 && <InvalidFeedback id={id || name} errors={errors} />}
-        </div>
+  return (
+    <div className={fieldWrapper}>
+      <div className={inputWrapper}>
+        <input
+          id={id || name}
+          name={name}
+          type="checkbox"
+          role={type}
+          className={`${inputStyles} ${isValid ? "is-valid" : ""} ${isInvalid ? "is-invalid" : ""}`}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={value || ""}
+        />
+        <Label id={id || name} text={label} cssClasses={labelStyles} isRequired={isRequired} />
+
+        {helpText && <HelpText id={id || name} text={helpText} cssClasses={helpTextStyles} />}
+        {(!errors || errors.length === 0) && <ValidFeedback id={id || name} />}
+        {errors && errors.length > 0 && <InvalidFeedback id={id || name} errors={errors} />}
       </div>
     </div>
   );
