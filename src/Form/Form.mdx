@@ -34,7 +34,7 @@ IFormSchema {
 
 Styles will have the following structure: (You should provide the css classes as a string)
 
-````tsx
+```tsx
 IFormStyles {
   title?: string;           // Title of the form
   form?: string;            // Form wrapper
@@ -44,9 +44,11 @@ IFormStyles {
     clear?: string;         // Clear button
   };
   inputs?: IStylesSchema;
-}```
+}
+```
 
 The input styles will have the following structure: (Default styles are used if no styles are provided)
+
 ```tsx
 IStylesSchema {
   fieldWrapper?: string;
@@ -56,7 +58,7 @@ IStylesSchema {
   placeHolder?: string;
   helpText?: string;
 }
-````
+```
 
 The fields should have the following structure:
 
