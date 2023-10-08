@@ -5,20 +5,12 @@ export interface IButtons {
   text?: string;
   type?: "button" | "submit" | "reset" | undefined;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  cssClasses?: string;
-  htmlProps?: React.HTMLFactory<HTMLDivElement>;
+  className?: string;
+  // htmlProps?: React.HTMLProps<HTMLButtonElement>;
   children?: React.ReactNode;
 }
 
-const Buttons: React.FC<IButtons> = ({
-  id,
-  text,
-  type = "button",
-  cssClasses = "btn btn-primary mx-2 btn-sm",
-  onClick,
-  children,
-  htmlProps,
-}) => {
+const Buttons: React.FC<IButtons> = ({ id, text, type = "button", onClick, children, className }) => {
   if (!text) {
     switch (type) {
       case "submit":
@@ -34,7 +26,7 @@ const Buttons: React.FC<IButtons> = ({
 
   return (
     <>
-      <button type={type} id={id} className={cssClasses} onClick={onClick} {...htmlProps}>
+      <button type={type} id={id} onClick={onClick} className={className}>
         {text}
         {children}
       </button>

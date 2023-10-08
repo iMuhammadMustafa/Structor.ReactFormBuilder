@@ -7,32 +7,34 @@ import ValidFeedback from "@/Elements/UI/ValidFeedback/ValidFeedback";
 import { IField } from "@/Types/Field";
 
 export interface IDropdown extends IField {
-  placeHolder?: string;
-  helpText?: string;
-  isTouched?: boolean;
   handleChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
   htmlProps?: React.SelectHTMLAttributes<HTMLSelectElement>;
-  children?: React.ReactNode;
 }
 
 function Dropdown(props: IDropdown) {
   const { id, name, placeHolder, label, value, options, helpText, isTouched, handleChange, handleBlur, errors } = {
     ...props,
   };
+  const { defaultStyles, stylesSchema } = { ...props };
 
   const isValid = isTouched && errors?.length === 0;
   const isInvalid = isTouched && errors && errors?.length > 0;
 
   const isRequired = props?.validationSchema?.isRequired ?? false;
 
+  const fieldWrapper = stylesSchema?.fieldWrapper ?? defaultStyles?.inputs?.fieldWrapper;
+  const inputWrapper = stylesSchema?.inputWrapper ?? defaultStyles?.inputs?.inputWrapper;
+  const inputStyles = stylesSchema?.input ?? defaultStyles?.inputs?.input;
+  const labelStyles = stylesSchema?.label ?? defaultStyles?.inputs?.label;
+  const helpTextStyles = stylesSchema?.helpText ?? defaultStyles?.inputs?.helpText;
+
   return (
-    <div className="mb-3 row">
-      {label && <Label id={id || name} text={label} isRequired={isRequired} cssClasses="col-sm-2" />}
-      <div className="col-sm-10">
+    <div className={fieldWrapper}>
+      {label && <Label id={id || name} text={label} isRequired={isRequired} cssClasses={labelStyles} />}
+      <div className={inputWrapper}>
         <select
-          className={`form-select ${isValid && "is-valid"} ${isInvalid && "is-invalid"}`}
-          aria-label="Default select"
+          className={`${inputStyles} ${isValid && "is-valid"} ${isInvalid && "is-invalid"}`}
           id={id || name}
           name={name}
           onChange={handleChange}
@@ -51,7 +53,7 @@ function Dropdown(props: IDropdown) {
           })}
         </select>
 
-        {helpText && <HelpText id={id || name} text={helpText} />}
+        {helpText && <HelpText id={id || name} text={helpText} cssClasses={helpTextStyles} />}
         {isValid && <ValidFeedback id={id || name} />}
         {isInvalid && <InvalidFeedback id={id || name} errors={errors} />}
       </div>

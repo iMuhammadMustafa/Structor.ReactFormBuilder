@@ -12,6 +12,7 @@ export interface IForm {
 
 export interface IFormSchema {
   title?: string;
+  defaultStyles?: IFormStyles;
   fields: Array<IFieldBuilder>;
   errors?: Array<IError>;
   dev?: boolean;
@@ -36,4 +37,24 @@ export enum FormActionsTypes {
   CLEAR = "CLEAR",
   UPDATE = "UPDATE",
   UPDATE_ERRORS = "UPDATE_ERRORS",
+}
+
+export interface IFormStyles {
+  title?: string;
+  form?: string;
+  buttons?: {
+    wrapper?: string;
+    submit?: string;
+    clear?: string;
+  };
+  inputs?: IStylesSchema;
+}
+
+export interface IStylesSchema {
+  fieldWrapper?: string;
+  inputWrapper?: string;
+  input?: string;
+  label?: string;
+  placeHolder?: string;
+  helpText?: string;
 }

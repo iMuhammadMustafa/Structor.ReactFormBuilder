@@ -12,7 +12,7 @@ import { FormActionsTypes, IForm, IFormAction, IFormState } from "./Form.types";
 export default function Form({
   values,
   setValues,
-  schema: { title, fields, clearBtn, dev = false },
+  schema: { title, fields, defaultStyles, clearBtn, dev = false },
   handleFormSubmit,
   children,
 }: IForm) {
@@ -148,7 +148,7 @@ export default function Form({
   };
 
   return (
-    <div className="container text-light col-7">
+    <>
       {dev && (
         <DevInfo
           isTouched={formState.isTouched}
@@ -158,25 +158,26 @@ export default function Form({
         />
       )}
 
-      <h1 className="text-center mb-3">{title}</h1>
-      <form onSubmit={handleSubmit} noValidate className="row">
+      <h1 className={defaultStyles?.title}>{title}</h1>
+      <form onSubmit={handleSubmit} noValidate className={defaultStyles?.form}>
         <FieldsBuilder
           fields={fields}
           isFormSubmit={formState.isSubmitted}
           isFormCleared={formState.isCleared}
           setValues={setFormValues}
           values={formValues}
+          defaultStyles={defaultStyles}
           handleInputChange={handleInputChange}
           handleInputBlur={handleInputBlur}
           errors={formState.errors}
         />
         {children}
 
-        <div className="text-center">
-          <Button type="submit" />
-          {clearBtn && <Button type="reset" onClick={handleClear} />}
+        <div className={defaultStyles?.buttons?.wrapper}>
+          <Button type="submit" className={defaultStyles?.buttons?.submit} />
+          {clearBtn && <Button type="reset" onClick={handleClear} className={defaultStyles?.buttons?.clear} />}
         </div>
       </form>
-    </div>
+    </>
   );
 }

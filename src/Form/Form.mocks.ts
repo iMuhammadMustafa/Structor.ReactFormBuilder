@@ -25,6 +25,23 @@ const formSchema: IFormSchema = {
   title: "Register",
   clearBtn: true,
   dev: true,
+  defaultStyles: {
+    title: "text-center mb-3",
+    form: "row",
+    buttons: {
+      wrapper: "text-center",
+      submit: "btn btn-primary mx-2 btn-sm",
+      clear: "btn btn-danger mx-2 btn-sm",
+    },
+    inputs: {
+      fieldWrapper: "mb-3 row",
+      inputWrapper: "col-sm-10",
+      input: "form-control",
+      label: "col-sm-2 col-form-label",
+      placeHolder: "",
+      helpText: "form-text",
+    },
+  },
   fields: [
     {
       fieldSchema: {
@@ -33,6 +50,14 @@ const formSchema: IFormSchema = {
         label: "Username",
         placeHolder: "Enter your username",
         helpText: "Write Admin to see validation error",
+      },
+      stylesSchema: {
+        fieldWrapper: "mb-3 row",
+        inputWrapper: "col-sm-10",
+        input: "form-control",
+        label: "col-sm-2 col-form-label",
+        placeHolder: "",
+        helpText: "form-text",
       },
       validationSchema: {
         customValidators: [
@@ -101,6 +126,9 @@ const formSchema: IFormSchema = {
           { label: "Prefer Not To Choose", value: "nothing" },
         ],
       },
+      stylesSchema: {
+        input: "form-select",
+      },
     },
     {
       fieldSchema: {
@@ -110,6 +138,12 @@ const formSchema: IFormSchema = {
       },
       validationSchema: {
         isRequired: true,
+      },
+      stylesSchema: {
+        fieldWrapper: "mb-3 row",
+        inputWrapper: "form-check col-sm-10 offset-sm-2",
+        input: "form-check-input me-2 ",
+        label: "form-check-label",
       },
     },
   ],
