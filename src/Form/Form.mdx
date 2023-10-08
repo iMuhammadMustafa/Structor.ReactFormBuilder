@@ -20,6 +20,51 @@ const handleFormSubmit = (values: any) => {
 <Form schema={formSchema} values={user} setValues={setUser} handleFormSubmit={handleFormSubmit} />;
 ```
 
+The end result will be:
+
+```tsx
+
+<h1 className={defaultStyles?.title}>{title}</h1>
+<form onSubmit={handleSubmit} noValidate className={defaultStyles?.form}>
+
+  {/** For Each Field **/}
+  <div className={fieldWrapper}>
+    {/** Label **/}
+    <label id={id + "-label"} htmlFor={id} className={labelStyles} >
+    {/** Input Wrapper **/}
+    <div className={inputWrapper}>
+      {/** Input **/}
+      <input className={`${inputStyles} ${isValid ? "is-valid" : ""} ${isInvalid ? "is-invalid" : ""}`}/>
+      {/** Help Text **/}
+      <div id={id + "-helpText"} className={helpTextStyles}>
+        {text}
+      </div>
+      {/** Valid Feedback if the errors array is empty and input is touched. You need to override valid-feedback css Class **/}
+      <div className="valid-feedback">
+        {text}
+      </div>
+      {/** Invalid Feedback if the input is touched and for each error this will appear. You need to override invalid-feedback css Class **/}
+      <>
+        {errors &&
+          errors.map((error, index) => (
+            <div key={error.name + index} id={id + "-invalidFeedback" + index} className="invalid-feedback">
+              {error.message}
+            </div>
+          ))}
+      </>
+    </div>
+  </div>
+
+
+  {/** Buttons **/}
+  <div className={defaultStyles?.buttons?.wrapper}>
+    <Button type="submit" className={defaultStyles?.buttons?.submit} />
+    {clearBtn && <Button type="reset" onClick={handleClear} className={defaultStyles?.buttons?.clear} />}
+  </div>
+</form>
+
+```
+
 Schema is a JSON object that defines the form structure. It is used to generate the form and validate the form data.
 
 ```tsx
