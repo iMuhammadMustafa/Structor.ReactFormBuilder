@@ -1,7 +1,8 @@
 {
   "name": "structor-reactformbuilder",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "type": "module",
+  "main": "src/exports/index.tsx",
   "scripts": {
     "dev": "vite",
     "test": "vitest run",

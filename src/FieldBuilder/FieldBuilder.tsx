@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CheckBoxInput from "@/Elements/Inputs/CheckBoxInput/CheckBoxInput";
 import Dropdown from "@/Elements/Inputs/Dropdown/Dropdown";
 import { IFormStyles, IStylesSchema } from "@/Form/Form.types";
+import { IValidationSchema } from "@/Types/IValidationSchema";
 
 import TextInput, { ITextInput } from "../Elements/Inputs/TextInput/TextInput";
 import { IError } from "../Types/Error";
