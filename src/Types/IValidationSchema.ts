@@ -1,4 +1,4 @@
-interface IValidationSchema {
+export interface IValidationSchema {
   minLength?: number;
   maxLength?: number;
   pattern?: RegExp;
@@ -12,7 +12,7 @@ interface IValidationSchema {
   customValidators?: Array<ICustomValidator>;
 }
 
-interface IPasswordValidationSchema {
+export interface IPasswordValidationSchema {
   isRequired?: boolean;
   hasNumber?: boolean;
   hasLowerCase?: boolean;
@@ -21,7 +21,7 @@ interface IPasswordValidationSchema {
   maxLength?: number;
   hasSymbols?: boolean;
 }
-interface ICustomValidator {
+export interface ICustomValidator {
   name: string;
   errorMessage: string;
   validate: ({ input, options }: any) => Promise<boolean>;
