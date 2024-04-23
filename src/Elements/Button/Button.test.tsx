@@ -9,7 +9,7 @@ describe("Buttons", () => {
 
     expect(el).toBeInTheDocument();
     expect(el).toHaveTextContent(ButtonsMockProps.Submit.text!);
-    expect(el).toHaveClass(ButtonsMockProps.Submit.cssClasses!);
+    expect(el).toHaveClass(ButtonsMockProps.Submit.className!);
   });
   it("it should show the clear button", () => {
     const result = render(<Buttons {...ButtonsMockProps.Clear} />);
@@ -17,6 +17,6 @@ describe("Buttons", () => {
 
     expect(el).toBeInTheDocument();
     expect(el).toHaveTextContent(ButtonsMockProps.Clear.text!);
-    expect(el).toHaveClass(ButtonsMockProps.Clear.cssClasses!);
+    expect(el).toHaveClass(ButtonsMockProps.Clear.className!);
   });
 });

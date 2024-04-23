@@ -9,7 +9,7 @@ import { IField } from "@/Types/Field";
 export interface IDropdown extends IField {
   handleChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
-  htmlProps?: React.SelectHTMLAttributes<HTMLSelectElement>;
+  htmlProps?: any;
 }
 
 function Dropdown(props: IDropdown) {

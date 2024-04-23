@@ -44,7 +44,7 @@ const Buttons: React.FC<IButtons> = ({ id, text, type = "button", onClick, child
  * @param {string} [text] - The text displayed on the button. Defaults to "Click" if not provided.
  * @param {"button" | "submit" | "reset" | undefined} [type] - The type of button. Defaults to "button".
  * @param {function} [onClick] - The function to be called when the button is clicked.
- * @param {string} [cssClasses] - Additional CSS classes to be applied to the button.
+ * @param {string} [className] - Additional CSS classes to be applied to the button.
  * @param {Object} [htmlProps] - Additional HTML properties to be applied to the button.
  * @param {React.ReactNode} [children] - Children components or elements to be rendered inside the button.
  * @example
@@ -53,7 +53,7 @@ const Buttons: React.FC<IButtons> = ({ id, text, type = "button", onClick, child
  *   id="my-button"
  *   text="Click Me"
  *   type="button"
- *   cssClasses="custom-button"
+ *   className="custom-button"
  *   onClick={(event) => {
  *     console.log("Button clicked!");
  *   }}

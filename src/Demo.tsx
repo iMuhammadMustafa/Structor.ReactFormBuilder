@@ -6,7 +6,9 @@ import { IForm, IFormSchema } from "./Form/Form.types";
 import { InputTypes } from "./Types/Field";
 
 export function Demo() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    password: "",
+  });
   const [errors, setSerrors] = useState([]);
 
   const checkIfUserExists = async ({ input, options }: any) => {

@@ -7,7 +7,7 @@ describe("InvalidFeedback", () => {
     const el = result.container.querySelector(`#${InvalidFeedbackMockProps.Base.id}-invalidFeedback0`);
 
     expect(el).toBeInTheDocument();
-    expect(el).toHaveTextContent(InvalidFeedbackMockProps.Base.errors![0].text);
+    expect(el).toHaveTextContent(InvalidFeedbackMockProps.Base.errors![0].message);
     expect(el).toHaveClass(InvalidFeedbackMockProps.Base.cssClasses!);
   });
 });

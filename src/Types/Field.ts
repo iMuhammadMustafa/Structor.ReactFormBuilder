@@ -1,6 +1,7 @@
 import { IFormStyles, IStylesSchema } from "@/Form/Form.types";
 
 import { IError } from "./Error";
+import { IValidationSchema } from "./IValidationSchema";
 
 export interface IField {
   id?: string;

@@ -25,6 +25,7 @@ export interface IFieldBuilder {
   isFormSubmit?: boolean;
   isFormCleared?: boolean;
   children?: React.ReactNode;
+  htmlProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export default function FieldBuilder(field: IFieldBuilder) {

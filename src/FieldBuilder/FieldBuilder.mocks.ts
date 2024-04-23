@@ -1,6 +1,7 @@
-import { IFieldBuilder } from "./FieldBuilder";
-import { IField, InputTypes } from "../Types/Field";
 import { action } from "@storybook/addon-actions";
+
+import { IField, InputTypes } from "../Types/Field";
+import { IFieldBuilder } from "./FieldBuilder";
 
 const Base: IFieldBuilder = {
   fieldSchema: {
@@ -28,7 +29,7 @@ const WithHTMLProps: IFieldBuilder = {
     ...Base.fieldSchema,
     name: "WithHTMLProps",
     label: "With HTML Props",
-    htmlProps: { disabled: true, required: true, placeholder: "Disabled" },
+    // htmlProps: { disabled: true, required: true, placeholder: "Disabled" },
   },
 };
 
@@ -40,8 +41,8 @@ const WithErrors: IFieldBuilder = {
     name: "username",
     label: "With Error",
     errors: [
-      { name: "Required", message: "This field is required", text: "This field is required", field: "username" },
-      { name: "Required", message: "This field is required", text: "This field is required", field: "email" },
+      { name: "Required", message: "This field is required", text: "This field is required", fieldName: "username" },
+      { name: "Required", message: "This field is required", text: "This field is required", fieldName: "email" },
     ],
   },
 };

@@ -86,7 +86,7 @@ export default function Form({
     }
   };
 
-  const timerRef = useRef<null | NodeJS.Timeout>(null);
+  const timerRef = useRef<null | ReturnType<typeof setTimeout>>(null);
   const handleInputChange = async (field: IField, e: React.ChangeEvent<HTMLInputElement>) => {
     formStateDispatch({ type: FormActionsTypes.UPDATE });
 
@@ -98,7 +98,7 @@ export default function Form({
       label: formField?.fieldSchema.label,
       validationSchema: formField?.validationSchema,
     };
-    clearTimeout(timerRef.current as NodeJS.Timeout);
+    clearTimeout(timerRef.current as ReturnType<typeof setTimeout>);
 
     timerRef.current = setTimeout(
       async () => {
