@@ -6,9 +6,70 @@ import FormMockProps from "./Form.mocks";
 
 <Meta of={formStories} />
 
-# Form
+# Structor: React Form Builder
 
-This is the base component. Usage:
+This is a form builder for React, It's aimed to be very developer friendly and straight forward; you pass a schema in the form of Javascript Object to the Form Component and it builds the form.
+This schema includes the types of fields and the built in or custom validation you need for the exact input field.
+
+It's aimed to be a very robust and well structred form builder.
+
+It's as simple as defining the schema and pass it to form, there are of course the typescript restrictions to make it error proof as I possibly can.
+
+[Demo](https://reactformbuilder.muhammadmustafa.dev/?path=/story/form-form--base)
+
+NPM: [![https://nodei.co/npm/structor-reactformbuilder.png?mini=true&downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/structor-reactformbuilder.png?mini=truedownloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/structor-reactformbuilder)
+
+# How to use the library
+
+### 1. Install the library using npm or yarn.
+
+```bash
+npm install structor-reactformbuilder
+
+yarn add structor-reactformbuilder
+```
+
+### 2. Import required components
+
+```tsx
+import { Form, InputTypes } from "structor-reactformbuilder";
+```
+
+### 3. Create the [Form Schema](#form-schema)
+
+_Example of a full Schema to directly copy [below](#Full-Schema-In-Action)_
+
+```tsx
+let formSchema = {
+  title: "Register",
+  fields: [
+    {
+      fieldSchema: {
+        type: InputTypes.TEXT,
+        name: "username",
+        label: "Username",
+        placeHolder: "Enter your username",
+      },
+      validationSchema: {
+        isRequired: true,
+        customValidators: [
+          {
+            name: "checkIfUserExists",
+            errorMessage: "Username already exists",
+            validate: checkIfUserExists,
+          },
+        ],
+      },
+    },
+  ],
+};
+```
+
+### 4. Use the [Form Component](#form-component)
+
+#### Form Component
+
+Is the base component, Usage:
 
 ```tsx
 const [values, setValues] = useState({});
@@ -65,6 +126,8 @@ The end result will be:
 
 ```
 
+#### Form Schema
+
 Schema is a JSON object that defines the form structure. It is used to generate the form and validate the form data.
 
 ```tsx
@@ -115,7 +178,7 @@ IFieldBuilder {
 }
 ```
 
-Example of a FieldBuilder:
+#### Example of a FieldBuilder:
 
 ```tsx
       fieldSchema: {
@@ -161,7 +224,7 @@ export interface IField {
   children?: React.ReactNode;
 }
 
-IOption {
+interface IOption {
   label: string;
   value: string;
 }
@@ -177,7 +240,7 @@ enum InputTypes {
 }
 ```
 
-The Validation Schema:
+#### The Validation Schema:
 
 ```tsx
 interface IValidationSchema {
@@ -210,7 +273,8 @@ interface ICustomValidator {
 }
 ```
 
-The Custom Validator should have the following structure:
+#### The Custom Validator should have the following structure:
+
 It should return a boolean value that is true if the field is valid and false if it is not.
 
 ```tsx
@@ -220,7 +284,7 @@ const checkIfUserExists = async ({ input, options }: any) => {
 };
 ```
 
-Example of a Schema:
+#### Full Schema In Action
 
 ```tsx
 let formSchema: IFormSchema = {
@@ -352,7 +416,7 @@ let formSchema: IFormSchema = {
 };
 ```
 
-Will result in the following
+#### Will result in the following
 
 <Canvas className="sb-bg-dark">
   <Story component={<Form {...FormMockProps.Base} />} />

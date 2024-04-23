@@ -1,11 +1,16 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 import path from "path";
-import { defineConfig, loadEnv } from 'vite'
+import { build, defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import pluginPurgeCss from "@mojojoejo/vite-plugin-purgecss"
 // @ts-ignore
 import pathsFromConfig from "./tsconfig.paths.json";
+
+import * as packageJson from './package.json'
+
+import dts from "vite-plugin-dts";
+
 
 // @ts-ignore
 export default defineConfig(({ command, mode}) => {
@@ -17,15 +22,30 @@ export default defineConfig(({ command, mode}) => {
 
   return { 
     plugins: [react(), 
-      pluginPurgeCss()],
+      pluginPurgeCss(), 
+      dts({ rollupTypes:true, include: ['lib'], exclude: ['src'] })
+    ],
     resolve: {
-      alias: resolveTSConfigPathAlias(),
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      }
     },
-    //envPrefix: "VITE",
     server: {
       host: true,
       port: Number.parseInt(env.PORT) || 3001,
       open: openBrowser,
+    },
+
+    build: {
+      lib: {
+        entry: path.resolve(__dirname, 'lib/main.ts'),
+        formats: ['es'],
+        name: 'structor-reactformbuilder',
+        fileName: 'main',
+      },
+      rollupOptions: {
+        external: ["react", "react/jsx-runtime", "react-dom"],
+      },      
     },
 
     test: {
@@ -40,17 +60,3 @@ export default defineConfig(({ command, mode}) => {
     },
   }
 });
-
-
-function resolveTSConfigPathAlias() {
-  const pathsAliasesArray = pathsFromConfig.compilerOptions.paths;
-  const aliasesKeys = Object.keys(pathsAliasesArray).map(x => x.slice(0, -2));
-
-  const aliases = {};
-
-  aliasesKeys.forEach(key => {
-    const pathString = pathsAliasesArray[key + "/*"][0].slice(0, -1);
-    aliases[key] = path.join(path.resolve(__dirname, pathString));
-  });
-  return aliases;
-}

@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "structor-reactformbuilder": ["node_modules/structor-reactformbuilder"]
     }
   }
 }
